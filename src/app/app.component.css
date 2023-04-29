@@ -1,0 +1,10 @@
+.MenuBar {
+    position: relative;
+    width: 101vw;
+    top: 0;
+    left: -5px;
+}
+
+.item {
+    width: 270px;
+}
