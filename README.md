@@ -6,8 +6,14 @@ sin specs:
 ```
 
 # Desplegar:
+
 ```
 ng build --prod --base-href=./
+```
+
+
+```
+ng deploy --base-href=/ProyectDaw2023/src
 ```
 
 ```

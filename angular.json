@@ -11,9 +11,9 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "baseHref": "/",
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "baseHref": "/ProyectoDaw2023/",
             "outputPath": "dist/proyecto-daw2023",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -95,9 +95,6 @@
             ],
             "scripts": []
           }
-        },
-        "deploy": {
-          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
