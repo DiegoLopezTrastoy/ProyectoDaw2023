@@ -8,14 +8,16 @@ sin specs:
 # Desplegar:
 
 ```
-ng build --prod --base-href=./
+ng deploy --configuration=test
 ```
-
-
-```
-ng deploy --base-href=/ProyectDaw2023/src
-```
+Seleccionar Github Pages
 
 ```
-npx angular-cli-ghpages --dir=dist/ProyectDaw2023
+ng deploy --base-href=/ProyectoDaw2023/
+```
+
+```
+git add .
+git commit -m "Mensaje"
+git push
 ```
