@@ -6,6 +6,7 @@ import { ChangeDetectorRef, Injectable, NgZone } from '@angular/core';
 export class VecinosService {
 
   public logueado:boolean = false;
+  public sidebarVisible: boolean = false;
 
   constructor() { }
 

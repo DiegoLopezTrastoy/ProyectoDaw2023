@@ -15,6 +15,8 @@ import { CarouselModule } from 'primeng/carousel';
 import { TagModule } from 'primeng/tag';
 import { FieldsetModule } from 'primeng/fieldset';
 import { RippleModule } from 'primeng/ripple';
+import { ImageModule } from 'primeng/image';
+import { ChartModule } from 'primeng/chart';
 
 @NgModule({
   declarations: [],
@@ -36,7 +38,9 @@ import { RippleModule } from 'primeng/ripple';
     CarouselModule,
     TagModule,
     FieldsetModule,
-    RippleModule
+    RippleModule,
+    ImageModule,
+    ChartModule
   ]
 })
 export class PrimengModule { }

@@ -17,6 +17,8 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   validar () {
     if (!this.service.logueado) {
       this.messageService.add({ severity: 'error', summary: 'Permiso denegado', detail: 'No tiene permiso para acceder a la ruta, inicie sesion para obtener el permiso.' });
+    } else {
+      this.service.sidebarVisible = false;
     }
     return this.service.logueado;
   }

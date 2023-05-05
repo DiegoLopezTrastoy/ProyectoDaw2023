@@ -10,7 +10,6 @@ import { OverlayPanel } from 'primeng/overlaypanel';
   providers: [ConfirmationService]
 })
 export class AppComponent implements OnInit {
-  public sidebarVisible: boolean = false;
   public itemsTopBar: MenuItem[] = [];
   public itemsMenu: MenuItem[] = [];
   public label: string = 'Iniciar sesion';
@@ -22,36 +21,17 @@ export class AppComponent implements OnInit {
   @ViewChild('logoutConfirm') logoutConfirm: OverlayPanel | undefined;
 
   constructor(
-    private service: VecinosService,
+    public service: VecinosService,
     private confirmationService: ConfirmationService,
     private cdr: ChangeDetectorRef
   ) { }
-
-  //Si la sesion está iniciada hace salir el mensaje para cerrar y viceversa
-  loginOrLogut(event: Event) {
-    (this.service.logueado) ? this.logoutConfirm!.toggle(event) : this.loginConfirm!.toggle(event);
-  }
-
-  logout() {
-    this.service.logout();
-    this.label = 'Iniciar sesion';
-    this.class = 'pi pi-user-minus';
-    this.logoutConfirm!.hide();
-  }
-
-  login() {
-    this.service.login(this.username, this.password);
-    this.label = 'Cerrar sesion';
-    this.class = 'pi pi-user-plus';
-    this.loginConfirm!.hide();
-  }
 
   ngOnInit(): void {
     this.itemsTopBar = [
       {
         icon: 'pi pi-fw pi-align-left',
         command: () => {
-          this.sidebarVisible = true;
+          this.service.sidebarVisible = true;
         },
       }
     ];
@@ -142,4 +122,24 @@ export class AppComponent implements OnInit {
       }];
 
   }
+
+  //Si la sesion está iniciada hace salir el mensaje para cerrar y viceversa
+  loginOrLogut(event: Event) {
+    (this.service.logueado) ? this.logoutConfirm!.toggle(event) : this.loginConfirm!.toggle(event);
+  }
+
+  logout() {
+    this.service.logout();
+    this.label = 'Iniciar sesion';
+    this.class = 'pi pi-user-plus';
+    this.logoutConfirm!.hide();
+  }
+  
+  login() {
+    this.service.login(this.username, this.password);
+    this.label = 'Cerrar sesion';
+    this.class = 'pi pi-user-minus';
+    this.loginConfirm!.hide();
+  }
+
 }
