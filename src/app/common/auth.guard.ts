@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, CanLoad, Route, RouterStateSnapshot, UrlSegment, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
-import { VecinosService } from './vecinos/vecinos.service';
-import { MessageService } from 'primeng/api';
+import { VecinosService } from '../vecinos/vecinos.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,13 +9,12 @@ import { MessageService } from 'primeng/api';
 export class AuthGuard implements CanActivate, CanActivateChild {
 
   constructor(
-    private service: VecinosService,
-    private messageService: MessageService
+    private service: VecinosService
   ) {}
 
   validar () {
     if (!this.service.logueado) {
-      this.messageService.add({ severity: 'error', summary: 'Permiso denegado', detail: 'No tiene permiso para acceder a la ruta, inicie sesion para obtener el permiso.' });
+      this.service.mensaje('Permiso denegado', 'No tiene permiso para acceder a la ruta, inicie sesion para obtener el permiso.', 'error');
     } else {
       this.service.sidebarVisible = false;
     }

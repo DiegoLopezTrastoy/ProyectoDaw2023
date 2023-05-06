@@ -17,6 +17,7 @@ import { FieldsetModule } from 'primeng/fieldset';
 import { RippleModule } from 'primeng/ripple';
 import { ImageModule } from 'primeng/image';
 import { ChartModule } from 'primeng/chart';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 @NgModule({
   declarations: [],
@@ -40,7 +41,8 @@ import { ChartModule } from 'primeng/chart';
     FieldsetModule,
     RippleModule,
     ImageModule,
-    ChartModule
+    ChartModule,
+    InputSwitchModule
   ]
 })
 export class PrimengModule { }
