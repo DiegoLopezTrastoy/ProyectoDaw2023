@@ -19,6 +19,9 @@ import { ImageModule } from 'primeng/image';
 import { ChartModule } from 'primeng/chart';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { TabViewModule } from 'primeng/tabview';
+import { PanelModule } from 'primeng/panel';
+import { MessagesModule } from 'primeng/messages';
+import { VirtualScrollerModule } from 'primeng/virtualscroller';
 
 @NgModule({
   declarations: [],
@@ -44,7 +47,10 @@ import { TabViewModule } from 'primeng/tabview';
     ImageModule,
     ChartModule,
     InputSwitchModule,
-    TabViewModule
+    TabViewModule,
+    PanelModule,
+    MessagesModule,
+    VirtualScrollerModule
   ]
 })
 export class PrimengModule { }

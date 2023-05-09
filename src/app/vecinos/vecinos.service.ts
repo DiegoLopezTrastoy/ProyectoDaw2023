@@ -24,41 +24,30 @@ export class VecinosService {
     ];
   }
 
-  getIngresosMensuales() {
-    // Todo recuperar obras de la base de datos
-    return [
-      30,
-      30,
-      30,
-      30
-    ];
+  getSaldoActual() {
+    // Todo recuperar saldo acual de la base de datos
+    return 9325;
   }
 
-  getIngresos() {
+  getIngresosMensuales() {
     // Todo recuperar obras de la base de datos
-    return [
-      { nombre: 'Pago comunidad', precio: 30 },
-      { nombre: 'Pago comunidad', precio: 30 },
-      { nombre: 'Pago comunidad', precio: 30 },
-      { nombre: 'Pago comunidad', precio: 30 }
-    ];
+    return [30, 30, 30, 30];
   }
 
   getGastosMensuales() {
     // Todo recuperar obras de la base de datos
-    return [
-      0,
-      200,
-      0,
-      200
-    ];
+    return [0, -200, 0, 200];
   }
 
-  getGastos() {
+  getGastosEIngresos() {
     // Todo recuperar obras de la base de datos
     return [
-      { nombre: 'Cambio contadores', precio: 200 },
-      { nombre: 'Reparación escalera rota', precio: 200 },
+      { nombre: 'Pago comunidad', precio: 30 },
+      { nombre: 'Cambio contadores', precio: -200 },
+      { nombre: 'Pago comunidad', precio: 30 },
+      { nombre: 'Reparación escalera rota', precio: -200 },
+      { nombre: 'Pago comunidad', precio: 30 },
+      { nombre: 'Pago comunidad', precio: 30 },
     ];
   }
 
