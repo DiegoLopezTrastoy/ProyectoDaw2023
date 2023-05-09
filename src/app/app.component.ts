@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { ConfirmEventType, ConfirmationService, MenuItem } from 'primeng/api';
+import { ConfirmationService, MenuItem } from 'primeng/api';
 import { VecinosService } from './vecinos/vecinos.service';
 import { OverlayPanel } from 'primeng/overlaypanel';
+import { DialogService } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-root',
@@ -10,8 +11,6 @@ import { OverlayPanel } from 'primeng/overlaypanel';
   providers: [ConfirmationService]
 })
 export class AppComponent implements OnInit {
-  public sidebarVisible: boolean = false;
-  public itemsTopBar: MenuItem[] = [];
   public itemsMenu: MenuItem[] = [];
   public label: string = 'Iniciar sesion';
   public class: string = 'pi pi-user-plus';
@@ -22,42 +21,19 @@ export class AppComponent implements OnInit {
   @ViewChild('logoutConfirm') logoutConfirm: OverlayPanel | undefined;
 
   constructor(
-    private service: VecinosService,
+    public service: VecinosService,
     private confirmationService: ConfirmationService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    public dialogService: DialogService
   ) { }
 
-  //Si la sesion está iniciada hace salir el mensaje para cerrar y viceversa
-  loginOrLogut(event: Event) {
-    (this.service.logueado) ? this.logoutConfirm!.toggle(event) : this.loginConfirm!.toggle(event);
-  }
-
-  logout() {
-    this.service.logout();
-    this.label = 'Iniciar sesion';
-    this.class = 'pi pi-user-minus';
-    this.logoutConfirm!.hide();
-  }
-
-  login() {
-    this.service.login(this.username, this.password);
-    this.label = 'Cerrar sesion';
-    this.class = 'pi pi-user-plus';
-    this.loginConfirm!.hide();
-  }
-
   ngOnInit(): void {
-    this.itemsTopBar = [
-      {
-        icon: 'pi pi-fw pi-align-left',
-        command: () => {
-          this.sidebarVisible = true;
-        },
-      }
-    ];
 
     this.itemsMenu = [
       {
+        label: 'Inicio',
+        routerLink: ['']
+      }, {
         label: 'Comunidad de vecinos',
         items: [
           {
@@ -112,16 +88,6 @@ export class AppComponent implements OnInit {
         label: 'Grupos Sociales',
         items: [
           {
-            label: 'Organigrama',
-            items: [{
-              label: 'Anfitrión',
-              routerLink: ['/grupos/organigrama/anfitrion']
-            }, {
-              label: 'Invitados',
-              routerLink: ['/grupos/organigrama/invitados']
-            }]
-          },
-          {
             label: 'Eventos',
             items: [{
               label: 'En curso',
@@ -142,4 +108,27 @@ export class AppComponent implements OnInit {
       }];
 
   }
+
+  //Si la sesion está iniciada hace salir el mensaje para cerrar y viceversa
+  loginOrLogut(event: Event) {
+    (this.service.logueado) ? this.logoutConfirm!.toggle(event) : this.loginConfirm!.toggle(event);
+    
+  }
+
+  logout() {
+    this.service.logout();
+    this.label = 'Iniciar sesion';
+    this.class = 'pi pi-user-plus';
+    this.logoutConfirm!.hide();
+  }
+  
+  login() {
+    this.service.login(this.username, this.password);
+    if (this.service.logueado) {
+      this.label = 'Cerrar sesion';
+      this.class = 'pi pi-user-minus';
+      this.loginConfirm!.hide();
+    }
+  }
+
 }

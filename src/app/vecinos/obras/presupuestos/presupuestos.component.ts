@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { VecinosService } from '../../vecinos.service';
 
 @Component({
   selector: 'app-presupuestos',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./presupuestos.component.css']
 })
 export class PresupuestosComponent {
+  public presupuestos;
 
+  constructor(private service: VecinosService) {
+    this.presupuestos = service.getObrasPresupuestadas();
+  }
 }

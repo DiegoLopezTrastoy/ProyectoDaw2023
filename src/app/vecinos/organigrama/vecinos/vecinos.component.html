@@ -1,1 +1,14 @@
-<p>vecinos works!</p>
+<div class="vecinos">
+    <h2>Vecinos:</h2>
+    <div class="array">
+    <p-card
+      *ngFor="let vecino of vecinos"
+      [header]="vecino.nombre"
+      [subheader]="vecino.telefono"
+    >
+      <ng-template pTemplate="header">
+        <img [src]="vecino.imagen" />
+      </ng-template>
+    </p-card>
+  </div>
+</div>

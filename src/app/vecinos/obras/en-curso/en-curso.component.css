@@ -1,0 +1,13 @@
+.obras {
+  text-align: center;
+}
+
+.array {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+}
+
+.array > * {
+  margin: 10px;
+}

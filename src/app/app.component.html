@@ -1,6 +1,11 @@
 <div>
     <p-toast></p-toast>
-    <p-menubar [model]="itemsTopBar">
+    <p-menubar>
+        <ng-template pTemplate="start">
+            <p-button styleClass="p-button-secondary p-button-text" (onClick)="this.service.sidebarVisible = true;">
+                <i class="pi pi-fw pi-align-left"></i>
+            </p-button>
+        </ng-template>
         <ng-template pTemplate="end">
             <p-button styleClass="p-button-secondary p-button-text" (onClick)="loginOrLogut($event)">
                 <i [class]="class"></i>&nbsp;
@@ -18,7 +23,7 @@
                         [feedback]="false"></p-password>
                     <label for="password">Password</label>
                 </span>
-                <br>
+                <p-button styleClass="p-button-link" (onClick)="service.logup()">Registrarse</p-button><br>
                 <p-button styleClass="p-button-success" (click)="login()">Iniciar sesion</p-button>&nbsp;
                 <p-button styleClass="p-button-danger" (click)="loginConfirm!.hide()">Cancelar</p-button>
             </p-overlayPanel>
@@ -33,7 +38,7 @@
     </p-menubar>
 </div>
 
-<p-sidebar [(visible)]="sidebarVisible">
+<p-sidebar [(visible)]="service.sidebarVisible">
     <ng-template pTemplate="header">
         <h3>Menu</h3>
     </ng-template>

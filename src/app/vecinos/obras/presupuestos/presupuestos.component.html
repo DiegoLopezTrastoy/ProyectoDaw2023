@@ -1,1 +1,16 @@
-<p>presupuestos works!</p>
+<div class="obras">
+    <h2>Obras presupuestadas:</h2>
+    <div class="array">
+      <p-card
+        *ngFor="let presupuesto of presupuestos"
+        [header]="presupuesto.nombre"
+        [subheader]="presupuesto.precio + '€'"
+      >
+        <p>{{ presupuesto.descripcion }}</p>
+        <ng-template pTemplate="header">
+          <img [src]="presupuesto.imagen" />
+        </ng-template>
+      </p-card>
+    </div>
+  </div>
+  

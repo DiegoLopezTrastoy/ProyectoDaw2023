@@ -14,12 +14,15 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { InicioComponent } from './inicio/inicio.component';
+import { LogupComponent } from './common/logup/logup.component';
+import { DialogService } from 'primeng/dynamicdialog';
 
 @NgModule({
   declarations: [
     AppComponent,
     Error404Component,
-    InicioComponent
+    InicioComponent,
+    LogupComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -34,6 +37,9 @@ import { InicioComponent } from './inicio/inicio.component';
     ToastModule
   ],
   bootstrap: [AppComponent],
-  providers: [MessageService]
+  providers: [
+    MessageService,
+    DialogService
+  ]
 })
 export class AppModule { }
