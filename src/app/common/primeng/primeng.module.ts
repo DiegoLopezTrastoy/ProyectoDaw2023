@@ -22,6 +22,8 @@ import { TabViewModule } from 'primeng/tabview';
 import { PanelModule } from 'primeng/panel';
 import { MessagesModule } from 'primeng/messages';
 import { VirtualScrollerModule } from 'primeng/virtualscroller';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { FileUploadModule } from 'primeng/fileupload';
 
 @NgModule({
   declarations: [],
@@ -50,7 +52,9 @@ import { VirtualScrollerModule } from 'primeng/virtualscroller';
     TabViewModule,
     PanelModule,
     MessagesModule,
-    VirtualScrollerModule
+    VirtualScrollerModule,
+    InputTextareaModule,
+    FileUploadModule
   ]
 })
 export class PrimengModule { }

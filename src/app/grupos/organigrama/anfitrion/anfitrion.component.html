@@ -1,1 +1,28 @@
-<p>anfitrion works!</p>
+<div class="primer">
+    <h1>Presidente</h1>
+    <div class="segundo">
+      <img [src]="anfitrion.imagen" />
+      <div class="tercer">
+        <div class="row">
+          <h3>Nombre: {{ anfitrion.nombre }}</h3>
+          <h4>Edad: {{anfitrion.edad}}</h4>
+          <h4>Numero de telefono: {{anfitrion.numTelefono}}</h4>
+          <h4>Fecha nombramiento: {{ anfitrion.fechaNombramiento }}</h4>
+        </div>
+        <div class="row">
+          <h4>Promesas:</h4>
+          <p-tabView>
+            <p-tabPanel
+              *ngFor="let promesa of anfitrion.promesas"
+              [header]="promesa.header"
+            >
+              <p>
+                {{ promesa.text }}
+              </p>
+            </p-tabPanel>
+          </p-tabView>
+        </div>
+      </div>
+    </div>
+  </div>
+  

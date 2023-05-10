@@ -1,1 +1,14 @@
-<p>invitados works!</p>
+<div class="vecinos">
+    <h2>Invitados:</h2>
+    <div class="array">
+    <p-card
+      *ngFor="let invitado of invitados"
+      [header]="invitado.nombre"
+      [subheader]="invitado.telefono"
+    >
+      <ng-template pTemplate="header">
+        <img [src]="invitado.imagen" />
+      </ng-template>
+    </p-card>
+  </div>
+</div>

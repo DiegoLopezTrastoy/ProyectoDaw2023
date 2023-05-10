@@ -12,7 +12,8 @@ h2 {
 }
 
 .ingEGas {
-    width: 47%;
+    min-width: 47%;
+    min-height: 80%;
 }
 
 .cuentsYsaldo {

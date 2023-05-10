@@ -9,10 +9,11 @@
     </div>
     <div class="ingEGas">
       <p-carousel
+        class="carousel"
         [value]="messages1"
         [numVisible]="3"
         [numScroll]="1"
-        [circular]="false"
+        [circular]="true"
         [orientation]="'vertical'"
       >
         <ng-template let-product pTemplate="item">

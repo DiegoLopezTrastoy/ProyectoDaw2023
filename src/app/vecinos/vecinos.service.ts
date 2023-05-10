@@ -8,6 +8,18 @@ import { MessageService } from 'primeng/api';
   providedIn: 'root',
 })
 export class VecinosService {
+  getUrlBackendImages() {
+    return '';
+  }
+
+  getAvisos(): any {
+    //Todo recuperar avisos de la base de datos
+    return [
+      {imagen: 'assets/no_image.jpg', descripcion: 'Cable suelto en la sala de cables.'},
+      {imagen: 'assets/no_image.jpg', descripcion: 'La luz del portal no enciende.'},
+      {imagen: 'assets/no_image.jpg', descripcion: 'Cable roto en la sala de cables.'},
+    ];
+  }
   public logueado: boolean = false;
   public sidebarVisible: boolean = false;
 
@@ -22,6 +34,10 @@ export class VecinosService {
     this.users = [
       { name: 'a', email: 'a', password: 'a', notificaciones: true },
     ];
+  }
+
+  addAviso(aviso: any) {
+    //Todo insertar aviso en la base de tatos
   }
 
   getSaldoActual() {
