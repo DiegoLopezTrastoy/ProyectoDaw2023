@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { VecinosService } from '../../vecinos.service';
 
 @Component({
   selector: 'app-vecinos',
@@ -6,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./vecinos.component.css']
 })
 export class VecinosComponent {
+  public vecinos;
+
+  constructor(private service: VecinosService) {
+    this.vecinos = service.getVecinos();
+  }
 
 }

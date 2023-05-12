@@ -1,1 +1,16 @@
-<p>en-curso works!</p>
+<div class="obras">
+    <h2>Eventos en curso:</h2>
+    <div class="array">
+      <p-card
+      *ngFor="let evento of eventos"
+        [header]="evento.nombre"
+        [subheader]="evento.precio + '€'"
+      >
+        <p>{{ evento.descripcion }}</p>
+        <ng-template pTemplate="header">
+          <img [src]="evento.imagen" />
+        </ng-template>
+      </p-card>
+    </div>
+  </div>
+  

@@ -1,1 +1,16 @@
-<p>finalizados works!</p>
+<div class="eventos">
+    <h2>Eventos finalizados:</h2>
+    <div class="array">
+      <p-card
+        *ngFor="let evento of eventos"
+        [header]="evento.nombre"
+        [subheader]="evento.precio + '€'"
+      >
+        <p>{{ evento.descripcion }}</p>
+        <ng-template pTemplate="header">
+          <img [src]="evento.imagen" />
+        </ng-template>
+      </p-card>
+    </div>
+  </div>
+  

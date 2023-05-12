@@ -14,8 +14,10 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { InicioComponent } from './inicio/inicio.component';
-import { LogupComponent } from './logup/logup.component';
+import { LogupComponent } from './common/logup/logup.component';
 import { DialogService } from 'primeng/dynamicdialog';
+import { VecinosModule } from './vecinos/vecinos.module';
+import { GruposModule } from './grupos/grupos.module';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { DialogService } from 'primeng/dynamicdialog';
     PasswordModule,
     FormsModule,
     InputTextModule,
-    ToastModule
+    ToastModule,
+    VecinosModule,
+    GruposModule
   ],
   bootstrap: [AppComponent],
   providers: [

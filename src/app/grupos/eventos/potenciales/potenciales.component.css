@@ -1,0 +1,15 @@
+.obras {
+    text-align: center;
+  }
+  
+  .array {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+  }
+  
+  .array > * {
+    width: 20%;
+    margin: 10px;
+  }
+  

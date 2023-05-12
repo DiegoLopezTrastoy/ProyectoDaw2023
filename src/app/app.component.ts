@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
     this.itemsMenu = [
       {
         label: 'Inicio',
-        routerLink: ''
+        routerLink: ['']
       }, {
         label: 'Comunidad de vecinos',
         items: [
@@ -112,6 +112,7 @@ export class AppComponent implements OnInit {
   //Si la sesion está iniciada hace salir el mensaje para cerrar y viceversa
   loginOrLogut(event: Event) {
     (this.service.logueado) ? this.logoutConfirm!.toggle(event) : this.loginConfirm!.toggle(event);
+    
   }
 
   logout() {
@@ -123,9 +124,11 @@ export class AppComponent implements OnInit {
   
   login() {
     this.service.login(this.username, this.password);
-    this.label = 'Cerrar sesion';
-    this.class = 'pi pi-user-minus';
-    this.loginConfirm!.hide();
+    if (this.service.logueado) {
+      this.label = 'Cerrar sesion';
+      this.class = 'pi pi-user-minus';
+      this.loginConfirm!.hide();
+    }
   }
 
 }

@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './common/auth.guard';
 import { InicioComponent } from './inicio/inicio.component';
 import { Error404Component } from './common/error404/error404.component';
-import { LogupComponent } from './logup/logup.component';
+import { LogupComponent } from './common/logup/logup.component';
 
 const routes: Routes = [{
   path: '',

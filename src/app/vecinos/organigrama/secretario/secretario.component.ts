@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { VecinosService } from '../../vecinos.service';
 
 @Component({
   selector: 'app-secretario',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./secretario.component.css']
 })
 export class SecretarioComponent {
+  public secretario: any;
 
+  constructor(private service: VecinosService) {
+    this.secretario = service.getSecretario();
+  }
 }

@@ -1,0 +1,35 @@
+h2 {
+    text-align: center;
+}
+
+.card {
+    width: 50%;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+}
+
+.ingEGas {
+    min-width: 47%;
+    min-height: 80%;
+}
+
+.cuentsYsaldo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cuentsYsaldo > * {
+    margin: 10px;
+}
+
+.saldo {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}

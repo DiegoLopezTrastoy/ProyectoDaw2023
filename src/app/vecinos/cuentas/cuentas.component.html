@@ -1,4 +1,25 @@
-
-<div class="card">
-    <p-chart type="line" [data]="data" [options]="options"></p-chart>
+<div>
+  <div class="cuentsYsaldo">
+    <h2>Cuentas:</h2>
+    <p-panel class="saldo" header="Saldo actual"> {{ saldo }}€ </p-panel>
+  </div>
+  <div class="container">
+    <div class="card">
+      <p-chart type="line" [data]="data" [options]="options"></p-chart>
+    </div>
+    <div class="ingEGas">
+      <p-carousel
+        class="carousel"
+        [value]="messages1"
+        [numVisible]="3"
+        [numScroll]="1"
+        [circular]="true"
+        [orientation]="'vertical'"
+      >
+        <ng-template let-product pTemplate="item">
+          <p-messages [(value)]="messages1" [closable]="false"></p-messages>
+        </ng-template>
+      </p-carousel>
+    </div>
+  </div>
 </div>

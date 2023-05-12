@@ -12,6 +12,8 @@ import { NoPresencialesComponent } from './reuniones/no-presenciales/no-presenci
 import { AvisosComponent } from './avisos/avisos.component';
 import { CuentasComponent } from './cuentas/cuentas.component';
 import { PrimengModule } from '../common/primeng/primeng.module';
+import { PresidenteComponent } from './organigrama/presidente/presidente.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,12 +25,15 @@ import { PrimengModule } from '../common/primeng/primeng.module';
     PresencialesComponent,
     NoPresencialesComponent,
     AvisosComponent,
-    CuentasComponent
+    CuentasComponent,
+    PresidenteComponent
   ],
   imports: [
     CommonModule,
     VecinosRoutingModule,
-    PrimengModule
-  ]
+    PrimengModule,
+    HttpClientModule
+  ],
+  providers: []
 })
 export class VecinosModule { }

@@ -5,6 +5,9 @@ import { EnCursoComponent } from './eventos/en-curso/en-curso.component';
 import { FinalizadosComponent } from './eventos/finalizados/finalizados.component';
 import { PotencialesComponent } from './eventos/potenciales/potenciales.component';
 import { GruposRoutingModule } from './grupos-routing.module';
+import { PrimengModule } from '../common/primeng/primeng.module';
+import { AnfitrionComponent } from './organigrama/anfitrion/anfitrion.component';
+import { InvitadosComponent } from './organigrama/invitados/invitados.component';
 
 
 
@@ -13,11 +16,14 @@ import { GruposRoutingModule } from './grupos-routing.module';
     EnCursoComponent,
     PotencialesComponent,
     FinalizadosComponent,
-    CuentasComponent
+    CuentasComponent,
+    AnfitrionComponent,
+    InvitadosComponent
   ],
   imports: [
     CommonModule,
-    GruposRoutingModule
+    GruposRoutingModule,
+    PrimengModule
   ]
 })
 export class GruposModule { }

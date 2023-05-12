@@ -18,6 +18,12 @@ import { RippleModule } from 'primeng/ripple';
 import { ImageModule } from 'primeng/image';
 import { ChartModule } from 'primeng/chart';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { TabViewModule } from 'primeng/tabview';
+import { PanelModule } from 'primeng/panel';
+import { MessagesModule } from 'primeng/messages';
+import { VirtualScrollerModule } from 'primeng/virtualscroller';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { FileUploadModule } from 'primeng/fileupload';
 
 @NgModule({
   declarations: [],
@@ -42,7 +48,13 @@ import { InputSwitchModule } from 'primeng/inputswitch';
     RippleModule,
     ImageModule,
     ChartModule,
-    InputSwitchModule
+    InputSwitchModule,
+    TabViewModule,
+    PanelModule,
+    MessagesModule,
+    VirtualScrollerModule,
+    InputTextareaModule,
+    FileUploadModule
   ]
 })
 export class PrimengModule { }

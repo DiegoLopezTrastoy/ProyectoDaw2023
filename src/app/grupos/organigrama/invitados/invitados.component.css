@@ -1,4 +1,4 @@
-.obras {
+.vecinos {
   text-align: center;
 }
 
@@ -9,6 +9,5 @@
 }
 
 .array > * {
-  width: 20%;
   margin: 10px;
 }

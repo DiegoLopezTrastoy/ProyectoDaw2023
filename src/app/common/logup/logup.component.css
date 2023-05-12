@@ -1,0 +1,10 @@
+.switch {
+    display: flex;
+    align-items: center;
+}
+
+.campo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
