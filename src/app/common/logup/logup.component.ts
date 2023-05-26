@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { VecinosService } from '../../vecinos/vecinos.service';
-import { Usuario } from '../interfaces/usuario.interface';
 
 @Component({
   selector: 'app-logup',
@@ -25,7 +24,7 @@ export class LogupComponent {
         if (this.password.length>0) {
           if (this.password === this.repeatPassword) {
             if (this.siLeido) {
-              const user: Usuario = {email: this.email, name: this.name, notificaciones: this.notificaciones, password: this.password};
+              const user: any = {email: this.email, name: this.name, notificaciones: this.notificaciones, password: this.password};
               this.service.insertarUser(user);
             }
           }

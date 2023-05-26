@@ -1,13 +1,32 @@
-import { Injectable, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Injectable, OnInit } from '@angular/core';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { LogupComponent } from '../common/logup/logup.component';
-import { Usuario } from '../common/interfaces/usuario.interface';
 import { MessageService } from 'primeng/api';
+import { HttpService } from '../http.service';
+import { tipos } from '../enum';
+import { User } from '../interfaces/User.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class VecinosService {
+  public logueado: boolean = false;
+  public userLogueado: User | undefined;
+  public sidebarVisible: boolean = false;
+
+  private ref: DynamicDialogRef | undefined;
+  private users: User[] = [];
+
+  constructor(
+    public dialogService: DialogService,
+    private messageService: MessageService,
+    private httpService: HttpService
+  ) {}
+
+  async inicializarUsers() {
+    this.users = (await this.httpService.getAllUser()) || [];
+  }
+
   getUrlBackendImages() {
     return '';
   }
@@ -15,24 +34,18 @@ export class VecinosService {
   getAvisos(): any {
     //Todo recuperar avisos de la base de datos
     return [
-      {imagen: 'assets/no_image.jpg', descripcion: 'Cable suelto en la sala de cables.'},
-      {imagen: 'assets/no_image.jpg', descripcion: 'La luz del portal no enciende.'},
-      {imagen: 'assets/no_image.jpg', descripcion: 'Cable roto en la sala de cables.'},
-    ];
-  }
-  public logueado: boolean = false;
-  public sidebarVisible: boolean = false;
-
-  private ref: DynamicDialogRef | undefined;
-  private users: Usuario[] = [];
-
-  constructor(
-    public dialogService: DialogService,
-    private messageService: MessageService
-  ) {
-    //Todo recuperar usuarios de la base de datos
-    this.users = [
-      { name: 'a', email: 'a', password: 'a', notificaciones: true },
+      {
+        imagen: 'assets/no_image.jpg',
+        descripcion: 'Cable suelto en la sala de cables.',
+      },
+      {
+        imagen: 'assets/no_image.jpg',
+        descripcion: 'La luz del portal no enciende.',
+      },
+      {
+        imagen: 'assets/no_image.jpg',
+        descripcion: 'Cable roto en la sala de cables.',
+      },
     ];
   }
 
@@ -192,7 +205,7 @@ export class VecinosService {
     };
   }
 
-  insertarUser(user: Usuario) {
+  insertarUser(user: any) {
     // Todo insertar usuario a la base de datos
     this.users.push(user);
   }
@@ -220,18 +233,20 @@ export class VecinosService {
     });
   }
 
-  login(username: string, password: string) {
+  async login(username: string, password: string) {
+    this.users = await this.httpService.getAllUser();
+
     for (let i = 0; i < this.users.length; i++) {
-      if (username && username === this.users[i].name) {
+      if (username && username === this.users[i].nombre) {
         if (password && password === this.users[i].password) {
           this.logueado = true;
-          break;
+          this.userLogueado = this.users[i];
+          return true;
         }
       }
     }
-    if (!this.logueado) {
-      this.mensaje('Credenciales incorrectas');
-    }
+    this.mensaje('Credenciales incorrectas');
+    return false;
   }
 
   logout() {
