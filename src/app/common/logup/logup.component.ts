@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { VecinosService } from '../../vecinos/vecinos.service';
-<<<<<<< Updated upstream
-=======
 import { MessageService } from 'primeng/api';
 import { User } from 'src/app/interfaces/User.interface';
 import { env } from 'src/env';
 import { Comunidad } from 'src/app/interfaces/Comunidad.interface';
 import { HttpService } from 'src/app/http.service';
->>>>>>> Stashed changes
 
 @Component({
   selector: 'app-logup',
@@ -34,19 +31,11 @@ export class LogupComponent implements OnInit {
     ) {}
 
   ngOnInit(): void {
-    this.http.getAllComunities().then((comunidades)=>{this.comunidades = comunidades});
+    this.http.getAllComunities().then((comunidades: any)=>{this.comunidades = comunidades});
   }
 
   registrarse() {
     if (this.name.length>0) {
-<<<<<<< Updated upstream
-      if (this.email.length>0) {
-        if (this.password.length>0) {
-          if (this.password === this.repeatPassword) {
-            if (this.siLeido) {
-              const user: any = {email: this.email, name: this.name, notificaciones: this.notificaciones, password: this.password};
-              this.service.insertarUser(user);
-=======
       if (this.numTel !== 0) {
         if (this.email.length>0) {
           if (this.password.length>0) {
@@ -65,7 +54,6 @@ export class LogupComponent implements OnInit {
                 severity: 'error',
                 summary: 'Las contraseñas deben coincidir.'
               });
->>>>>>> Stashed changes
             }
           } else {
             this.message.add({

@@ -8,14 +8,8 @@ import { ConfirmationService, MenuItem } from 'primeng/api';
 import { VecinosService } from './vecinos/vecinos.service';
 import { OverlayPanel } from 'primeng/overlaypanel';
 import { DialogService } from 'primeng/dynamicdialog';
-<<<<<<< Updated upstream
-import { HttpService } from './http.service';
-import { Comunidad } from './interfaces/Comunidad.interface';
-import { User } from './interfaces/User.interface';
-=======
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { Comunidad } from './interfaces/Comunidad.interface';
->>>>>>> Stashed changes
 
 @Component({
   selector: 'app-root',
@@ -27,11 +21,6 @@ export class AppComponent implements OnInit {
   public itemsMenu: MenuItem[] = [];
   public label: string = 'Iniciar sesion';
   public class: string = 'pi pi-user-plus';
-<<<<<<< Updated upstream
-  public password: string = 'abc123.';
-  public username: string = 'Diego';
-  private subItems: MenuItem[] = [];
-=======
   public password: string = '';
   public username: string = '';
   private subItems: MenuItem[] = [
@@ -40,7 +29,6 @@ export class AppComponent implements OnInit {
       disabled: true,
     },
   ];
->>>>>>> Stashed changes
 
   @ViewChild('loginConfirm') loginConfirm: OverlayPanel | undefined;
   @ViewChild('logoutConfirm') logoutConfirm: OverlayPanel | undefined;
@@ -49,12 +37,7 @@ export class AppComponent implements OnInit {
     public service: VecinosService,
     private confirmationService: ConfirmationService,
     private cdr: ChangeDetectorRef,
-<<<<<<< Updated upstream
-    public dialogService: DialogService,
-    private httpService: HttpService
-=======
     public dialogService: DialogService
->>>>>>> Stashed changes
   ) {}
 
   ngOnInit(): void {
@@ -62,78 +45,6 @@ export class AppComponent implements OnInit {
       {
         label: 'Inicio',
         routerLink: [''],
-<<<<<<< Updated upstream
-        command: ()=>{this.service.sidebarVisible = false}
-      },
-      {
-        label: 'Comunidad de vecinos',
-        items: this.subItems
-      },
-    ];
-
-    // items: [
-    //   {
-    //     label: 'Obras',
-    //     items: [{
-    //       label: 'En curso',
-    //       routerLink: ['/vecinos/obras/en_curso']
-    //     }, {
-    //       label: 'Finalizadas',
-    //       routerLink: ['/vecinos/obras/finalizadas']
-    //     }, {
-    //       label: 'Presupuestos',
-    //       routerLink: ['/vecinos/obras/presupuestos']
-    //     }]
-    //   },
-    //   {
-    //     label: 'Reuniones',
-    //     items: [{
-    //       label: 'Reuniones presenciales',
-    //       routerLink: ['/vecinos/reuniones/presenciales']
-    //     }, {
-    //       label: 'Reuniones no Presenciales',
-    //       routerLink: ['/vecinos/reuniones/no_presenciales']
-    //     }]
-    //   },
-    //   {
-    //     label: 'Avisos',
-    //     routerLink: ['/vecinos/avisos']
-    //   },
-    //   {
-    //     label: 'Cuentas',
-    //     routerLink: ['/vecinos/cuentas']
-    //   }
-    // ]
-  }
-
-  async inicializarComunidades(user: User) {
-    const comunidades: Comunidad[] = await this.httpService.getComunidades();
-    comunidades.forEach((comunidad) => {
-      this.subItems.push({
-        label: comunidad.direccion,
-        items: [
-          {
-            label: 'Organigrama',
-            items: [
-              {
-                label: 'Presidente',
-                routerLink: ['/vecinos/organigrama/presidente'],
-                command: ()=>{console.log("hola");
-                }
-              }, {
-                label: 'Secretario',
-                routerLink: ['/vecinos/organigrama/secretario']
-              }, {
-                label: 'Vecinos',
-                routerLink: ['/vecinos/organigrama/vecinos']
-              }
-            ],
-          },
-        ],
-      });
-      this.cdr.detectChanges();
-    });
-=======
       },
       {
         label: 'Comunidades de vecinos',
@@ -141,7 +52,6 @@ export class AppComponent implements OnInit {
         items: this.subItems,
       },
     ];
->>>>>>> Stashed changes
   }
 
   //Si la sesion está iniciada hace salir el mensaje para cerrar y viceversa
@@ -156,19 +66,6 @@ export class AppComponent implements OnInit {
     this.label = 'Iniciar sesion';
     this.class = 'pi pi-user-plus';
     this.logoutConfirm!.hide();
-<<<<<<< Updated upstream
-  }
-
-  async login() {
-    const correcto = await this.service.login(this.username, this.password);
-    if (correcto) {
-      this.label = 'Cerrar sesion';
-      this.class = 'pi pi-user-minus';
-      this.inicializarComunidades(this.service.userLogueado!);
-      this.loginConfirm!.hide();
-    }
-  }
-=======
     this.descargarSideBar();
   }
 
@@ -286,5 +183,4 @@ export class AppComponent implements OnInit {
       },
     ];
   }
->>>>>>> Stashed changes
 }

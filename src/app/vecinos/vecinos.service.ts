@@ -3,53 +3,16 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { LogupComponent } from '../common/logup/logup.component';
 import { MessageService } from 'primeng/api';
 import { HttpService } from '../http.service';
-<<<<<<< Updated upstream
-import { tipos } from '../enum';
-import { User } from '../interfaces/User.interface';
-=======
 import { User } from '../interfaces/User.interface';
 import * as bcrypt from 'bcryptjs';
 import { Comunidad } from '../interfaces/Comunidad.interface';
 import { Vecino } from '../interfaces/Vecino.interface';
->>>>>>> Stashed changes
 
 @Injectable({
   providedIn: 'root',
 })
 export class VecinosService {
   public logueado: boolean = false;
-<<<<<<< Updated upstream
-  public userLogueado: User | undefined;
-  public sidebarVisible: boolean = false;
-
-  private ref: DynamicDialogRef | undefined;
-  private users: User[] = [];
-
-  constructor(
-    public dialogService: DialogService,
-    private messageService: MessageService,
-    private httpService: HttpService
-  ) {}
-
-  async inicializarUsers() {
-    this.users = (await this.httpService.getAllUser()) || [];
-  }
-
-  getUrlBackendImages() {
-    return '';
-  }
-
-  getAvisos(): any {
-    //Todo recuperar avisos de la base de datos
-    return [
-      {
-        imagen: 'assets/no_image.jpg',
-        descripcion: 'Cable suelto en la sala de cables.',
-      },
-      {
-        imagen: 'assets/no_image.jpg',
-        descripcion: 'La luz del portal no enciende.',
-=======
   public sidebarVisible: boolean = false;
   
   private ref: DynamicDialogRef | undefined;
@@ -83,7 +46,6 @@ export class VecinosService {
           {
             imagen: 'assets/no_image.jpg',
             descripcion: 'La luz del portal no enciende.',
->>>>>>> Stashed changes
       },
       {
         imagen: 'assets/no_image.jpg',
@@ -230,11 +192,6 @@ export class VecinosService {
     };
   }
 
-<<<<<<< Updated upstream
-  insertarUser(user: any) {
-    // Todo insertar usuario a la base de datos
-    this.users.push(user);
-=======
   insertarUser(
     user: User,
     image: File,
@@ -256,7 +213,6 @@ export class VecinosService {
       .then((vecino) => {
         this.http.enlazarVecinoComunidad(vecino!, comunidad);
       });
->>>>>>> Stashed changes
   }
 
   mensaje(header: string, text: string = '', severity: string = 'info') {
@@ -283,13 +239,6 @@ export class VecinosService {
   }
 
   async login(username: string, password: string) {
-<<<<<<< Updated upstream
-    this.users = await this.httpService.getAllUser();
-
-    for (let i = 0; i < this.users.length; i++) {
-      if (username && username === this.users[i].nombre) {
-        if (password && password === this.users[i].password) {
-=======
     this.blocked = true;
     this.users = await this.http.getAllUsers();
     for (let i = 0; i < this.users.length; i++) {
@@ -299,22 +248,17 @@ export class VecinosService {
           (await bcrypt.compare(password, this.users[i].password!))
         ) {
           this.usuarioLogueado = this.users[i];
->>>>>>> Stashed changes
           this.logueado = true;
-          this.userLogueado = this.users[i];
+          this.usuarioLogueado = this.users[i];
           return true;
         }
       }
     }
-<<<<<<< Updated upstream
-    this.mensaje('Credenciales incorrectas');
-    return false;
-=======
     if (!this.logueado) {
       this.mensaje('Credenciales incorrectas');
     }
     this.blocked = false;
->>>>>>> Stashed changes
+    return false;
   }
 
   logout() {
