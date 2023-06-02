@@ -18,6 +18,7 @@ import { LogupComponent } from './common/logup/logup.component';
 import { DialogService } from 'primeng/dynamicdialog';
 import { VecinosModule } from './vecinos/vecinos.module';
 import { GruposModule } from './grupos/grupos.module';
+import { BlockUIModule } from 'ng-block-ui';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { GruposModule } from './grupos/grupos.module';
     InputTextModule,
     ToastModule,
     VecinosModule,
-    GruposModule
+    GruposModule,
+    BlockUIModule.forRoot({message: 'Cargando...'})
   ],
   bootstrap: [AppComponent],
   providers: [

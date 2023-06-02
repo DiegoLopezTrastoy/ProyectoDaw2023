@@ -24,6 +24,9 @@ import { MessagesModule } from 'primeng/messages';
 import { VirtualScrollerModule } from 'primeng/virtualscroller';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { FileUploadModule } from 'primeng/fileupload';
+import { BlockUIModule } from 'primeng/blockui';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 @NgModule({
   declarations: [],
@@ -54,7 +57,10 @@ import { FileUploadModule } from 'primeng/fileupload';
     MessagesModule,
     VirtualScrollerModule,
     InputTextareaModule,
-    FileUploadModule
+    FileUploadModule,
+    BlockUIModule,
+    ProgressSpinnerModule,
+    MultiSelectModule
   ]
 })
 export class PrimengModule { }

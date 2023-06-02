@@ -8,19 +8,7 @@
         <h4>Edad: {{presidente.edad}}</h4>
         <h4>Numero de telefono: {{presidente.numTelefono}}</h4>
         <h4>Fecha nombramiento: {{ presidente.fechaNombramiento }}</h4>
-      </div>
-      <div class="row">
-        <h4>Promesas:</h4>
-        <p-tabView>
-          <p-tabPanel
-            *ngFor="let promesa of presidente.promesas"
-            [header]="promesa.header"
-          >
-            <p>
-              {{ promesa.text }}
-            </p>
-          </p-tabPanel>
-        </p-tabView>
+        <h4>Fecha fin: {{ presidente.fechaFin }}</h4>
       </div>
     </div>
   </div>

@@ -3,14 +3,22 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { LogupComponent } from '../common/logup/logup.component';
 import { MessageService } from 'primeng/api';
 import { HttpService } from '../http.service';
+<<<<<<< Updated upstream
 import { tipos } from '../enum';
 import { User } from '../interfaces/User.interface';
+=======
+import { User } from '../interfaces/User.interface';
+import * as bcrypt from 'bcryptjs';
+import { Comunidad } from '../interfaces/Comunidad.interface';
+import { Vecino } from '../interfaces/Vecino.interface';
+>>>>>>> Stashed changes
 
 @Injectable({
   providedIn: 'root',
 })
 export class VecinosService {
   public logueado: boolean = false;
+<<<<<<< Updated upstream
   public userLogueado: User | undefined;
   public sidebarVisible: boolean = false;
 
@@ -41,6 +49,41 @@ export class VecinosService {
       {
         imagen: 'assets/no_image.jpg',
         descripcion: 'La luz del portal no enciende.',
+=======
+  public sidebarVisible: boolean = false;
+  
+  private ref: DynamicDialogRef | undefined;
+  private users: User[] = [];
+  public usuarioLogueado: User = {};
+  public comunidad: Comunidad = {};
+  public blocked: boolean = false;
+  
+  constructor(
+    public dialogService: DialogService,
+    private messageService: MessageService,
+    private http: HttpService
+    ) {
+      //Todo recuperar usuarios de la base de datos
+      // this.users = [
+        //   { name: 'a', email: 'a', password: 'a', notificaciones: true },
+        // ];
+      }
+
+      getAllComuniti(): Promise<Comunidad[]> {
+        return this.http.getAllComunities()
+      }
+      
+      getAvisos(): any {
+        //Todo recuperar avisos de la base de datos
+        return [
+          {
+            imagen: 'assets/no_image.jpg',
+            descripcion: 'Cable suelto en la sala de cables.',
+          },
+          {
+            imagen: 'assets/no_image.jpg',
+            descripcion: 'La luz del portal no enciende.',
+>>>>>>> Stashed changes
       },
       {
         imagen: 'assets/no_image.jpg',
@@ -171,16 +214,7 @@ export class VecinosService {
       numTelefono: 617725261,
       imagen: 'assets/no_image.jpg',
       fechaNombramiento: '09/08/2023',
-      promesas: [
-        {
-          header: 'Gastos',
-          text: 'Prometo reducir los gastos de la comunidad al minimo.',
-        },
-        {
-          header: 'Otro',
-          text: 'Prometo reducir el precio de a comunidad.',
-        },
-      ],
+      fechaFin: '09/08/2024'
     };
   }
 
@@ -192,22 +226,37 @@ export class VecinosService {
       numTelefono: 658679811,
       imagen: 'assets/no_image.jpg',
       fechaNombramiento: '09/08/2023',
-      promesas: [
-        {
-          header: 'Ascensor',
-          text: 'Prometo dar fin a la incertidumbre acerca de las obras del ascensor.',
-        },
-        {
-          header: 'Otro',
-          text: 'Prometo solucionar cualquier problema que surja en menos de 24 horas.',
-        },
-      ],
+      fechaFin: '09/08/2024'
     };
   }
 
+<<<<<<< Updated upstream
   insertarUser(user: any) {
     // Todo insertar usuario a la base de datos
     this.users.push(user);
+=======
+  insertarUser(
+    user: User,
+    image: File,
+    vivienda: string,
+    comunidad: Comunidad
+  ) {
+    bcrypt.hash(user.password!, 10).then(async (hashedPassword: string) => {
+      const image2: any = await this.http.uploadImage(image);
+      user.imagen = image2!.file.originalname;
+      user.password = hashedPassword;
+      this.http.createUser(user).then((user) => {
+        this.usuarioLogueado = user || {};
+      });
+      this.users = await this.http.getAllUsers();
+      this.ref?.close();
+    });
+    this.http
+      .createVecino({ userid: this.usuarioLogueado.id, vivienda })
+      .then((vecino) => {
+        this.http.enlazarVecinoComunidad(vecino!, comunidad);
+      });
+>>>>>>> Stashed changes
   }
 
   mensaje(header: string, text: string = '', severity: string = 'info') {
@@ -234,22 +283,46 @@ export class VecinosService {
   }
 
   async login(username: string, password: string) {
+<<<<<<< Updated upstream
     this.users = await this.httpService.getAllUser();
 
     for (let i = 0; i < this.users.length; i++) {
       if (username && username === this.users[i].nombre) {
         if (password && password === this.users[i].password) {
+=======
+    this.blocked = true;
+    this.users = await this.http.getAllUsers();
+    for (let i = 0; i < this.users.length; i++) {
+      if (username && username === this.users[i].nombre) {
+        if (
+          password &&
+          (await bcrypt.compare(password, this.users[i].password!))
+        ) {
+          this.usuarioLogueado = this.users[i];
+>>>>>>> Stashed changes
           this.logueado = true;
           this.userLogueado = this.users[i];
           return true;
         }
       }
     }
+<<<<<<< Updated upstream
     this.mensaje('Credenciales incorrectas');
     return false;
+=======
+    if (!this.logueado) {
+      this.mensaje('Credenciales incorrectas');
+    }
+    this.blocked = false;
+>>>>>>> Stashed changes
   }
 
   logout() {
     this.logueado = false;
+  }
+
+  async getComunidadesByUser() {
+    const comunidades: Comunidad[] = await this.http.getAllComunities();
+    comunidades.forEach((comunidad, i) => {});
   }
 }

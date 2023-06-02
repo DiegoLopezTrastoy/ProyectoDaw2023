@@ -21,7 +21,7 @@
                 <span class="p-float-label">
                     <p-password [(ngModel)]="password" [toggleMask]="true" required="true"
                         [feedback]="false"></p-password>
-                    <label for="password">Password</label>
+                    <label for="password">Contraseña</label>
                 </span>
                 <p-button styleClass="p-button-link" (onClick)="service.logup()">Registrarse</p-button><br>
                 <p-button styleClass="p-button-success" (click)="login()">Iniciar sesion</p-button>&nbsp;
@@ -37,7 +37,9 @@
         </ng-template>
     </p-menubar>
 </div>
-
+    <p-blockUI [blocked]="service.blocked">
+        <p-progressSpinner></p-progressSpinner>
+    </p-blockUI>
 <p-sidebar [(visible)]="service.sidebarVisible">
     <ng-template pTemplate="header">
         <h3>Menu</h3>
@@ -47,4 +49,4 @@
     </p>
 </p-sidebar>
 
-<router-outlet></router-outlet>
+<router-outlet *ngIf="!service.blocked"></router-outlet>

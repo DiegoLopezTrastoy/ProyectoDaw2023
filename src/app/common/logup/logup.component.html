@@ -1,38 +1,66 @@
 <div>
-    <!-- Formulario -->
-    <div>
-        <span class="campo">
-            <label for="name">Nombre: </label>
-            <input type="text" id="name" pInputText [(ngModel)]="name" />
-        </span><br>
-        <span class="campo">
-            <label for="email">Email: </label>
-            <input type="email" id="email" pInputText [(ngModel)]="email" />
-        </span><br>
-        <span class="campo">
-            <label for="password">Contraseña: </label>
-            <p-password styleClass="pass" [(ngModel)]="password" [feedback]="false"></p-password>
-        </span><br>
-        <span class="campo">
-            <label for="password2">Repetir contraseña: </label>
-            <p-password styleClass="pass" [(ngModel)]="repeatPassword" [feedback]="false"></p-password>
-        </span><br>
-        <br>
-        <div class="switch">
-            <p-inputSwitch [(ngModel)]="siLeido"></p-inputSwitch> &nbsp;
-            <span>He leido y acepto la politica de privacidad.</span>
-        </div>
-        <br>
-        <br>
-        <div class="switch">
-            <p-inputSwitch [(ngModel)]="notificaciones"></p-inputSwitch>&nbsp;
-            <span>Deseo recivir notificaciones cuando ocurra una reunion o un nuevo aviso.</span>
-        </div>
+  <!-- Formulario -->
+  <div>
+    <span class="campo">
+      <label for="name">Nombre: </label>
+      <input type="text" id="name" pInputText [(ngModel)]="name" /> </span
+    ><br />
+    <span class="campo">
+      <label for="email">Email: </label>
+      <input type="email" id="email" pInputText [(ngModel)]="email" /> </span
+    ><br />
+    <span class="campo">
+      <label for="numTel">Número de teléfono: </label>
+      <input type="tel" id="numTel" pInputText [(ngModel)]="numTel" /> </span
+    ><br />
+    <span class="campo">
+      <label for="password">Contraseña: </label>
+      <p-password
+        styleClass="pass"
+        [(ngModel)]="password"
+        [feedback]="false"
+      ></p-password> </span
+    ><br />
+    <span class="campo">
+      <label for="password2">Repetir contraseña: </label>
+      <p-password
+        styleClass="pass"
+        [(ngModel)]="repeatPassword"
+        [feedback]="false"
+      ></p-password> </span
+    ><br />
+    <br />
+    <span class="campo">
+      <label>Comunidad: </label>
+      <p-multiSelect
+        [options]="comunidades"
+        [(ngModel)]="comunidad"
+        optionLabel="Comunidad"
+      ></p-multiSelect> </span
+    ><br />
+    <br />
+    <div class="switch">
+      <p-inputSwitch [(ngModel)]="siLeido"></p-inputSwitch> &nbsp;
+      <span>He leido y acepto la politica de privacidad.</span>
     </div>
-    <br>
-    <!-- Botones -->
-    <div>
-        <p-button styleClass="p-button-success" (onClick)="registrarse()">Registrarse</p-button>&nbsp;
-        <p-button styleClass="p-button-danger" (onClick)="cancelar()">Cancelar</p-button>
-    </div>
+  </div>
+  <br />
+  <!-- mode="basic" -->
+  <p-fileUpload
+    [customUpload]="true"
+    chooseLabel="Insertar Foto de perfil"
+    [auto]="true"
+    accept="image/*"
+    (uploadHandler)="onFileUpload($event)"
+  ></p-fileUpload
+  ><br />
+  <!-- Botones -->
+  <div>
+    <p-button styleClass="p-button-success" (onClick)="registrarse()"
+      >Registrarse</p-button
+    >&nbsp;
+    <p-button styleClass="p-button-danger" (onClick)="cancelar()"
+      >Cancelar</p-button
+    >
+  </div>
 </div>

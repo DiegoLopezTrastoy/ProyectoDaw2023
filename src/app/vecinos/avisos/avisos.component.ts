@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { VecinosService } from '../vecinos.service';
+import { env } from 'src/env';
 
 @Component({
   selector: 'app-avisos',
@@ -10,12 +11,11 @@ export class AvisosComponent {
 
   public avisos: any[];
   public visible: boolean = false;
-  public urlBackendImage: string;
+  public urlBackendImage: string = `${env.BASE_URL}/image/`;
   public textArea: string = '';
 
   constructor(private servicio: VecinosService) {
     this.avisos = servicio.getAvisos();
-    this.urlBackendImage = servicio.getUrlBackendImages();
   }
 
   anadir() {
