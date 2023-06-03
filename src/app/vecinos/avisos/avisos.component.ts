@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { VecinosService } from '../vecinos.service';
 import { env } from 'src/env';
 
@@ -7,15 +7,17 @@ import { env } from 'src/env';
   templateUrl: './avisos.component.html',
   styleUrls: ['./avisos.component.css']
 })
-export class AvisosComponent {
+export class AvisosComponent implements OnInit {
 
-  public avisos: any[];
+  public avisos: any[] = [];
   public visible: boolean = false;
   public urlBackendImage: string = `${env.BASE_URL}/image/`;
   public textArea: string = '';
 
-  constructor(private servicio: VecinosService) {
-    this.avisos = servicio.getAvisos();
+  constructor(private servicio: VecinosService) {}
+  
+  async ngOnInit() {
+    this.avisos = await this.servicio.getAvisos();
   }
 
   anadir() {

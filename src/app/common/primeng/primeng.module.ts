@@ -27,6 +27,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { BlockUIModule } from 'primeng/blockui';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { SelectButtonModule } from 'primeng/selectbutton';
 
 @NgModule({
   declarations: [],
@@ -60,7 +61,8 @@ import { MultiSelectModule } from 'primeng/multiselect';
     FileUploadModule,
     BlockUIModule,
     ProgressSpinnerModule,
-    MultiSelectModule
+    MultiSelectModule,
+    SelectButtonModule
   ]
 })
 export class PrimengModule { }

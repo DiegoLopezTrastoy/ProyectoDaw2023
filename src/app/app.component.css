@@ -8,3 +8,8 @@
 .item {
     width: 270px;
 }
+
+#login {
+    display: flex;
+    flex-direction: row;
+}

@@ -4,9 +4,9 @@ import { LogupComponent } from '../common/logup/logup.component';
 import { MessageService } from 'primeng/api';
 import { HttpService } from '../http.service';
 import { User } from '../interfaces/User.interface';
-import * as bcrypt from 'bcryptjs';
 import { Comunidad } from '../interfaces/Comunidad.interface';
 import { Vecino } from '../interfaces/Vecino.interface';
+import { Aviso } from '../interfaces/Aviso.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -18,43 +18,25 @@ export class VecinosService {
   private ref: DynamicDialogRef | undefined;
   private users: User[] = [];
   public usuarioLogueado: User = {};
-  public comunidad: Comunidad = {};
+  public comunidad: Comunidad[] = [];
   public blocked: boolean = false;
   
   constructor(
     public dialogService: DialogService,
     private messageService: MessageService,
     private http: HttpService
-    ) {
-      //Todo recuperar usuarios de la base de datos
-      // this.users = [
-        //   { name: 'a', email: 'a', password: 'a', notificaciones: true },
-        // ];
-      }
+    ) {}
 
       getAllComuniti(): Promise<Comunidad[]> {
         return this.http.getAllComunities()
       }
       
-      getAvisos(): any {
-        //Todo recuperar avisos de la base de datos
-        return [
-          {
-            imagen: 'assets/no_image.jpg',
-            descripcion: 'Cable suelto en la sala de cables.',
-          },
-          {
-            imagen: 'assets/no_image.jpg',
-            descripcion: 'La luz del portal no enciende.',
-      },
-      {
-        imagen: 'assets/no_image.jpg',
-        descripcion: 'Cable roto en la sala de cables.',
-      },
-    ];
+      getAvisos(): Promise<Aviso[]> {
+        // return this.http.getAvisosByComuniti(this.comunidad);
+        return this.http.getAllAvisos();
   }
 
-  addAviso(aviso: any) {
+  addAviso(aviso: Aviso) {
     //Todo insertar aviso en la base de tatos
   }
 
@@ -192,27 +174,21 @@ export class VecinosService {
     };
   }
 
-  insertarUser(
+  async insertarUser(
     user: User,
     image: File,
-    vivienda: string,
     comunidad: Comunidad
   ) {
-    bcrypt.hash(user.password!, 10).then(async (hashedPassword: string) => {
       const image2: any = await this.http.uploadImage(image);
       user.imagen = image2!.file.originalname;
-      user.password = hashedPassword;
       this.http.createUser(user).then((user) => {
+        this.logueado = true;
         this.usuarioLogueado = user || {};
       });
       this.users = await this.http.getAllUsers();
       this.ref?.close();
-    });
-    this.http
-      .createVecino({ userid: this.usuarioLogueado.id, vivienda })
-      .then((vecino) => {
-        this.http.enlazarVecinoComunidad(vecino!, comunidad);
-      });
+      this.http
+        .createVecino({ userid: this.usuarioLogueado.id, vivienda:  comunidad.direccion});
   }
 
   mensaje(header: string, text: string = '', severity: string = 'info') {
@@ -245,12 +221,13 @@ export class VecinosService {
       if (username && username === this.users[i].nombre) {
         if (
           password &&
-          (await bcrypt.compare(password, this.users[i].password!))
+          (password === this.users[i].password!)
         ) {
           this.usuarioLogueado = this.users[i];
           this.logueado = true;
           this.usuarioLogueado = this.users[i];
-          return true;
+          this.comunidad = await this.http.getComunidadByUser(this.usuarioLogueado);
+          break;
         }
       }
     }
@@ -258,15 +235,9 @@ export class VecinosService {
       this.mensaje('Credenciales incorrectas');
     }
     this.blocked = false;
-    return false;
   }
 
   logout() {
     this.logueado = false;
-  }
-
-  async getComunidadesByUser() {
-    const comunidades: Comunidad[] = await this.http.getAllComunities();
-    comunidades.forEach((comunidad, i) => {});
   }
 }

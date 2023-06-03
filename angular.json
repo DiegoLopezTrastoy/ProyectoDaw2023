@@ -17,16 +17,21 @@
             "outputPath": "dist/proyecto-daw2023",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              {
+                "input": "src/assets/theme.scss",
+                "bundleName": "lara-ligth",
+                "inject": false
+              },
+              {
+                "input": "src/assets/theme2.scss",
+                "bundleName": "lara-dark",
+                "inject": false
+              }
             ],
             "scripts": []
           },
@@ -78,20 +83,23 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.css"
+              "src/styles.css",
+              {
+                "input": "src/assets/theme.scss",
+                "bundleName": "lara-ligth",
+                "inject": false
+              },{
+                "input": "src/assets/theme2.scss",
+                "bundleName": "lara-dark",
+                "inject": false
+              }
             ],
             "scripts": []
           }

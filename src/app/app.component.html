@@ -1,52 +1,90 @@
 <div>
-    <p-toast></p-toast>
-    <p-menubar>
-        <ng-template pTemplate="start">
-            <p-button styleClass="p-button-secondary p-button-text" (onClick)="this.service.sidebarVisible = true;">
-                <i class="pi pi-fw pi-align-left"></i>
-            </p-button>
-        </ng-template>
-        <ng-template pTemplate="end">
-            <p-button styleClass="p-button-secondary p-button-text" (onClick)="loginOrLogut($event)">
-                <i [class]="class"></i>&nbsp;
-                <span id="label">{{label}}</span>
-            </p-button>
-            <p-overlayPanel #loginConfirm>
-                <br>
-                <span class="p-float-label">
-                    <input pInputText id="username" style="width: 235px;" [(ngModel)]="username" />
-                    <label htmlFor="username">Nombre de usuario</label>
-                </span>
-                <br>
-                <span class="p-float-label">
-                    <p-password [(ngModel)]="password" [toggleMask]="true" required="true"
-                        [feedback]="false"></p-password>
-                    <label for="password">Contraseña</label>
-                </span>
-                <p-button styleClass="p-button-link" (onClick)="service.logup()">Registrarse</p-button><br>
-                <p-button styleClass="p-button-success" (click)="login()">Iniciar sesion</p-button>&nbsp;
-                <p-button styleClass="p-button-danger" (click)="loginConfirm!.hide()">Cancelar</p-button>
-            </p-overlayPanel>
-            <p-overlayPanel #logoutConfirm>
-                <div style="text-align: center;">
-                    <span>Está seguro de que desea cerrar sesion?</span><br><br>
-                    <p-button styleClass="p-button-success" (click)="logout()">Aceptar</p-button>&nbsp;
-                    <p-button styleClass="p-button-danger" (click)="logoutConfirm!.hide()">Cancelar</p-button>
-                </div>
-            </p-overlayPanel>
-        </ng-template>
-    </p-menubar>
-</div>
-    <p-blockUI [blocked]="service.blocked">
-        <p-progressSpinner></p-progressSpinner>
-    </p-blockUI>
-<p-sidebar [(visible)]="service.sidebarVisible">
-    <ng-template pTemplate="header">
-        <h3>Menu</h3>
+  <p-toast></p-toast>
+  <p-menubar>
+    <ng-template pTemplate="start">
+      <p-button
+        styleClass="p-button-secondary p-button-text"
+        (onClick)="this.service.sidebarVisible = true"
+      >
+        <i class="pi pi-fw pi-align-left"></i>
+      </p-button>
     </ng-template>
-    <p>
-        <p-panelMenu [model]="itemsMenu" [style]="{'width':'270px'}" [multiple]="true"></p-panelMenu>
-    </p>
+    <ng-template pTemplate="end">
+      <div id="login">
+        <!-- <p-selectButton
+          [options]="stateOptions"
+          [(ngModel)]="value"
+          optionLabel="label"
+          optionValue="value"
+          (click)="cambiarTema()"
+        ></p-selectButton> -->
+        <p-button
+          styleClass="p-button-secondary p-button-text"
+          (onClick)="loginOrLogut($event)"
+        >
+          <i [class]="class"></i>&nbsp;
+          <span id="label">{{ label }}</span>
+        </p-button>
+      </div>
+      <p-overlayPanel #loginConfirm>
+        <br />
+        <span class="p-float-label">
+          <input
+            pInputText
+            id="username"
+            style="width: 235px"
+            [(ngModel)]="username"
+          />
+          <label htmlFor="username">Nombre de usuario</label>
+        </span>
+        <br />
+        <span class="p-float-label">
+          <p-password
+            [(ngModel)]="password"
+            [toggleMask]="true"
+            required="true"
+            [feedback]="false"
+          ></p-password>
+          <label for="password">Contraseña</label>
+        </span>
+        <p-button styleClass="p-button-link" (onClick)="service.logup()"
+          >Registrarse</p-button
+        ><br />
+        <p-button styleClass="p-button-success" (click)="login()"
+          >Iniciar sesion</p-button
+        >&nbsp;
+        <p-button styleClass="p-button-danger" (click)="loginConfirm!.hide()"
+          >Cancelar</p-button
+        >
+      </p-overlayPanel>
+      <p-overlayPanel #logoutConfirm>
+        <div style="text-align: center">
+          <span>Está seguro de que desea cerrar sesion?</span><br /><br />
+          <p-button styleClass="p-button-success" (click)="logout()"
+            >Aceptar</p-button
+          >&nbsp;
+          <p-button styleClass="p-button-danger" (click)="logoutConfirm!.hide()"
+            >Cancelar</p-button
+          >
+        </div>
+      </p-overlayPanel>
+    </ng-template>
+  </p-menubar>
+</div>
+<p-blockUI [blocked]="service.blocked">
+  <p-progressSpinner></p-progressSpinner>
+</p-blockUI>
+<p-sidebar [(visible)]="service.sidebarVisible">
+  <ng-template pTemplate="header">
+    <h3>Menu</h3>
+  </ng-template>
+  <p>
+    <p-panelMenu
+      [model]="itemsMenu"
+      [style]="{ width: '270px' }"
+      [multiple]="true"
+    ></p-panelMenu>
+  </p>
 </p-sidebar>
 
 <router-outlet *ngIf="!service.blocked"></router-outlet>

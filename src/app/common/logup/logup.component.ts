@@ -42,7 +42,7 @@ export class LogupComponent implements OnInit {
             if (this.password === this.repeatPassword) {
               if (this.siLeido) {
                 const user: User = {email: this.email, nombre: this.name, password: this.password};
-                this.service.insertarUser(user, this.image, this.vivienda, this.comunidad);
+                this.service.insertarUser(user, this.image, this.comunidad);
               } else {
                 this.message.add({
                   severity: 'error',

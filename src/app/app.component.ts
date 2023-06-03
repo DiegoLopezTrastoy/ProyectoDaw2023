@@ -3,6 +3,7 @@ import {
   OnInit,
   ViewChild,
   ChangeDetectorRef,
+  Inject,
 } from '@angular/core';
 import { ConfirmationService, MenuItem } from 'primeng/api';
 import { VecinosService } from './vecinos/vecinos.service';
@@ -10,6 +11,7 @@ import { OverlayPanel } from 'primeng/overlaypanel';
 import { DialogService } from 'primeng/dynamicdialog';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { Comunidad } from './interfaces/Comunidad.interface';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -21,11 +23,13 @@ export class AppComponent implements OnInit {
   public itemsMenu: MenuItem[] = [];
   public label: string = 'Iniciar sesion';
   public class: string = 'pi pi-user-plus';
-  public password: string = '';
-  public username: string = '';
+  public password: string = 'abc123.';
+  public username: string = 'Diego';
+  // public stateOptions: any[] = [{label: 'Claro', value: 'lara-ligth.css'}, {label: 'Oscuro', value: 'lara-dark.css'}];
+  // public value: string = 'theme.scss';
   private subItems: MenuItem[] = [
     {
-      label: 'Usted no pertenece a ningúna comunidad de vecinos',
+      label: 'Usted no pertenece a ninguna comunidad de vecinos',
       disabled: true,
     },
   ];
@@ -34,6 +38,7 @@ export class AppComponent implements OnInit {
   @ViewChild('logoutConfirm') logoutConfirm: OverlayPanel | undefined;
 
   constructor(
+    @Inject(DOCUMENT) private document: Document,
     public service: VecinosService,
     private confirmationService: ConfirmationService,
     private cdr: ChangeDetectorRef,
@@ -53,6 +58,15 @@ export class AppComponent implements OnInit {
       },
     ];
   }
+
+  // cambiarTema() {
+  //   console.log(this.value);
+    
+  //   let themeLink = this.document.getElementById('app-theme') as HTMLLinkElement;
+  //   if (themeLink) {
+  //     themeLink.href = this.value;
+  //   }
+  // }
 
   //Si la sesion está iniciada hace salir el mensaje para cerrar y viceversa
   loginOrLogut(event: Event) {
@@ -83,7 +97,7 @@ export class AppComponent implements OnInit {
   descargarSideBar() {
     this.subItems = [
       {
-        label: 'Usted no pertenece a ningúna comunidad de vecinos',
+        label: 'Usted no pertenece a ninguna comunidad de vecinos',
         disabled: true,
       },
     ];
