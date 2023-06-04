@@ -172,7 +172,7 @@ export class AppComponent implements OnInit {
     },
     {
       label: 'Cuentas',
-      routerLink: ['/vecinos/cuentas'],
+        routerLink: ['/vecinos/cuentas'],
     },]
 
     this.subItems = [];
@@ -181,7 +181,8 @@ export class AppComponent implements OnInit {
       this.subItems.push({
         label: comunidad.direccion,
         icon: 'pi pi-home' ,
-        items: subsubItems
+        items: subsubItems,
+        command: ()=>{this.service.comunidad = comunidad}
       })
     });
 

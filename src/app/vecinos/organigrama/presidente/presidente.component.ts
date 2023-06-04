@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { VecinosService } from '../../vecinos.service';
 
 @Component({
@@ -6,10 +6,13 @@ import { VecinosService } from '../../vecinos.service';
   templateUrl: './presidente.component.html',
   styleUrls: ['./presidente.component.css'],
 })
-export class PresidenteComponent {
+export class PresidenteComponent implements OnInit {
   public presidente: any;
+  public visible: boolean = false;
+  constructor(private service: VecinosService) {}
 
-  constructor(private service: VecinosService) {
-    this.presidente = service.getPresidente();
+  async ngOnInit() {
+    this.presidente = await this.service.getPresidente();
+    this.visible = true;
   }
 }

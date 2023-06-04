@@ -12,6 +12,13 @@ import { Ingreso } from './interfaces/Ingreso.interface';
   providedIn: 'root'
 })
 export class HttpService {
+  async getPresidente(comunidad: Comunidad) {
+    const criteria = {"comunidades": {"id": comunidad.id}}
+    const presidente: any = (await this.http.post<any[]>(`${env.BASE_URL}/presidente/by-comunidad`, criteria).toPromise()||[])[0];
+    const date = new Date();
+    const edad = date.getFullYear() - presidente.user.fecha_nacimiento.slice(presidente.user.fecha_nacimiento.lastIndexOf('/')+1);
+    return {imagen: presidente.user.imagen, nombre: presidente.user.nombre, edad , numTelefono: presidente.user.num_telefono, fechaNombramiento: presidente.fechaInicio, fechaFin: presidente.fechaFin}
+  }
   constructor(private http: HttpClient) { }
   
   async getIngresosByComuniti(comunidad: Comunidad): Promise<Ingreso> {
@@ -28,9 +35,9 @@ export class HttpService {
     return await this.http.get<Aviso[]>(`${env.BASE_URL}/aviso`).toPromise() || [];
   }
 
-  async getAvisosByComuniti(comunidad: Comunidad): Promise<Aviso> {
+  async getAvisosByComuniti(comunidad: Comunidad): Promise<Aviso[]> {
     const criteria = {"comunidad": {"id": comunidad.id}}
-    return await this.http.post<Aviso>(`${env.BASE_URL}/aviso/by-comunidad`, criteria).toPromise() || {}
+    return await this.http.post<Aviso[]>(`${env.BASE_URL}/aviso/by-comunidad`, criteria).toPromise() || [];
   }
 
   async getComunidadByUser(user: User): Promise<Comunidad[]> {

@@ -36,7 +36,13 @@
         [options]="comunidades"
         [(ngModel)]="comunidad"
         optionLabel="Comunidad"
-      ></p-multiSelect> </span
+      >
+      <ng-template let-comunidad pTemplate="item">
+        <div>
+          <div>{{ comunidad.direction }}</div>
+        </div>
+    </ng-template>
+    </p-multiSelect> </span
     ><br />
     <br />
     <div class="switch">

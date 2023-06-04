@@ -18,7 +18,7 @@ export class VecinosService {
   private ref: DynamicDialogRef | undefined;
   private users: User[] = [];
   public usuarioLogueado: User = {};
-  public comunidad: Comunidad[] = [];
+  public comunidad: Comunidad = {};
   public blocked: boolean = false;
   
   constructor(
@@ -33,7 +33,9 @@ export class VecinosService {
       
       getAvisos(): Promise<Aviso[]> {
         // return this.http.getAvisosByComuniti(this.comunidad);
-        return this.http.getAllAvisos();
+        console.log(this.comunidad);
+        
+        return this.http.getAvisosByComuniti(this.comunidad);
   }
 
   addAviso(aviso: Aviso) {
@@ -73,19 +75,19 @@ export class VecinosService {
       {
         nombre: 'Ascensor',
         precio: 20000,
-        imagen: 'assets/no_image.jpg',
+        imagen: 'no_image.jpg',
         descripcion: 'Instalación del ascensor.',
       },
       {
         nombre: 'Ascensor',
         precio: 25000,
-        imagen: 'assets/no_image.jpg',
+        imagen: 'no_image.jpg',
         descripcion: 'Instalación del ascensor.',
       },
       {
         nombre: 'Ascensor',
         precio: 30000,
-        imagen: 'assets/no_image.jpg',
+        imagen: 'no_image.jpg',
         descripcion: 'Instalación del ascensor.',
       },
     ];
@@ -97,13 +99,13 @@ export class VecinosService {
       {
         nombre: 'Cambio contadores',
         precio: 200,
-        imagen: 'assets/no_image.jpg',
+        imagen: 'no_image.jpg',
         descripcion: 'Cambio de los contadores de la luz.',
       },
       {
         nombre: 'Reparación escalera rota',
         precio: 200,
-        imagen: 'assets/no_image.jpg',
+        imagen: 'no_image.jpg',
         descripcion: 'Reparación de una de las escaleras.',
       },
     ];
@@ -115,14 +117,14 @@ export class VecinosService {
       {
         nombre: 'Chapa lateral',
         precio: 200,
-        imagen: 'assets/no_image.jpg',
+        imagen: 'no_image.jpg',
         descripcion:
           'Reparación de una de las chapas latrales que se rompió un día de tormenta.',
       },
       {
         nombre: 'Cableado general',
         precio: 100,
-        imagen: 'assets/no_image.jpg',
+        imagen: 'no_image.jpg',
         descripcion:
           'Cambio del cableado wifi de la sala de cables y ordenación de los mismos.',
       },
@@ -135,17 +137,17 @@ export class VecinosService {
       {
         nombre: 'Diego López Trastoy',
         telefono: '658679811',
-        imagen: 'assets/no_image.jpg',
+        imagen: 'no_image.jpg',
       },
       {
         nombre: 'María del Carmen Trastoy Verez',
         telefono: '617725261',
-        imagen: 'assets/no_image.jpg',
+        imagen: 'no_image.jpg',
       },
       {
         nombre: 'Pepito Perez Pereira',
         telefono: '658679811',
-        imagen: 'assets/no_image.jpg',
+        imagen: 'no_image.jpg',
       },
     ];
   }
@@ -156,7 +158,7 @@ export class VecinosService {
       nombre: 'María del Carmen Trastoy Verez',
       edad: 47,
       numTelefono: 617725261,
-      imagen: 'assets/no_image.jpg',
+      imagen: 'no_image.jpg',
       fechaNombramiento: '09/08/2023',
       fechaFin: '09/08/2024'
     };
@@ -164,14 +166,7 @@ export class VecinosService {
 
   getPresidente() {
     // Todo recuperar presidente de la base de datos
-    return {
-      nombre: 'Pepito Perez Pereira',
-      edad: 38,
-      numTelefono: 658679811,
-      imagen: 'assets/no_image.jpg',
-      fechaNombramiento: '09/08/2023',
-      fechaFin: '09/08/2024'
-    };
+    return this.http.getPresidente(this.comunidad);
   }
 
   async insertarUser(
@@ -226,7 +221,6 @@ export class VecinosService {
           this.usuarioLogueado = this.users[i];
           this.logueado = true;
           this.usuarioLogueado = this.users[i];
-          this.comunidad = await this.http.getComunidadByUser(this.usuarioLogueado);
           break;
         }
       }

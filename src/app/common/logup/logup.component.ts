@@ -30,8 +30,9 @@ export class LogupComponent implements OnInit {
     private http: HttpService
     ) {}
 
-  ngOnInit(): void {
-    this.http.getAllComunities().then((comunidades: any)=>{this.comunidades = comunidades});
+  async ngOnInit() {
+    this.comunidades = await this.http.getAllComunities();
+    console.log(this.comunidades);
   }
 
   registrarse() {
