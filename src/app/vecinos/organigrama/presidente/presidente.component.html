@@ -1,12 +1,17 @@
 <div class="primer" *ngIf="visible">
   <h1>Presidente</h1>
   <div class="segundo">
-    <img [src]="'https://www.dtrastoy.informaticapinguela.net/image/'+presidente.imagen" />
+    <img
+      [src]="
+        'https://www.dtrastoy.informaticapinguela.net/image/' +
+        presidente.imagen
+      "
+    />
     <div class="tercer">
       <div class="row">
         <h3>Nombre: {{ presidente.nombre }}</h3>
-        <h4>Edad: {{presidente.edad}}</h4>
-        <h4>Numero de telefono: {{presidente.numTelefono}}</h4>
+        <h4>Edad: {{ presidente.edad }}</h4>
+        <h4>Numero de telefono: {{ presidente.numTelefono }}</h4>
         <h4>Fecha nombramiento: {{ presidente.fechaNombramiento }}</h4>
         <h4>Fecha fin: {{ presidente.fechaFin }}</h4>
       </div>

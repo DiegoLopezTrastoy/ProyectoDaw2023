@@ -12,6 +12,7 @@ export class PresidenteComponent implements OnInit {
   constructor(private service: VecinosService) {}
 
   async ngOnInit() {
+    this.visible = false;
     this.presidente = await this.service.getPresidente();
     this.visible = true;
   }

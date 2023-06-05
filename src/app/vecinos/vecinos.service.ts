@@ -135,6 +135,10 @@ export class VecinosService {
     return this.http.getVecinos(this.comunidad);
   }
 
+  getSecretario() {
+    return this.http.getSecretario(this.comunidad);
+  }
+
   getPresidente() {
     return this.http.getPresidente(this.comunidad);
   }

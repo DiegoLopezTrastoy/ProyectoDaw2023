@@ -29,6 +29,14 @@ export class HttpService {
     return array;
   }
 
+  async getSecretario(comunidad: Comunidad) {
+    const criteria = {"comunidades": {"id": comunidad.id}}
+    const secretario: any = (await this.http.post<any[]>(`${env.BASE_URL}/secretario/by-comunidad`, criteria).toPromise()||[])[0];
+    const date = new Date();
+    const edad = date.getFullYear() - secretario.user.fecha_nacimiento.slice(secretario.user.fecha_nacimiento.lastIndexOf('/')+1);
+    return {imagen: secretario.user.imagen, nombre: secretario.user.nombre, edad , numTelefono: secretario.user.num_telefono, fechaNombramiento: secretario.fechaInicio, fechaFin: secretario.fechaFin}
+  }
+
   async getPresidente(comunidad: Comunidad) {
     const criteria = { comunidades: { id: comunidad.id } };
     const presidente: any = ((await this.http
@@ -49,6 +57,7 @@ export class HttpService {
       fechaFin: presidente.fechaFin,
     };
   }
+  
   constructor(private http: HttpClient) { }
   
   async getIngresosByComuniti(comunidad: Comunidad): Promise<Ingreso> {
