@@ -14,13 +14,13 @@ import { Aviso } from '../interfaces/Aviso.interface';
 export class VecinosService {
   public logueado: boolean = false;
   public sidebarVisible: boolean = false;
-  
+
   private ref: DynamicDialogRef | undefined;
   private users: User[] = [];
   public usuarioLogueado: User = {};
   public comunidad: Comunidad = {};
   public blocked: boolean = false;
-  
+
   constructor(
     public dialogService: DialogService,
     private messageService: MessageService,
@@ -28,7 +28,7 @@ export class VecinosService {
     ) {}
 
       getAllComuniti(): Promise<Comunidad[]> {
-        return this.http.getAllComunities()
+        return this.http.getAllComunities();
       }
       
       getAvisos(): Promise<Aviso[]> {
@@ -132,58 +132,26 @@ export class VecinosService {
   }
 
   getVecinos() {
-    // Todo recuperar vecinos de la base de datos
-    return [
-      {
-        nombre: 'Diego López Trastoy',
-        telefono: '658679811',
-        imagen: 'no_image.jpg',
-      },
-      {
-        nombre: 'María del Carmen Trastoy Verez',
-        telefono: '617725261',
-        imagen: 'no_image.jpg',
-      },
-      {
-        nombre: 'Pepito Perez Pereira',
-        telefono: '658679811',
-        imagen: 'no_image.jpg',
-      },
-    ];
-  }
-
-  getSecretario() {
-    // Todo recuperar presidente de la base de datos
-    return {
-      nombre: 'María del Carmen Trastoy Verez',
-      edad: 47,
-      numTelefono: 617725261,
-      imagen: 'no_image.jpg',
-      fechaNombramiento: '09/08/2023',
-      fechaFin: '09/08/2024'
-    };
+    return this.http.getVecinos(this.comunidad);
   }
 
   getPresidente() {
-    // Todo recuperar presidente de la base de datos
     return this.http.getPresidente(this.comunidad);
   }
 
-  async insertarUser(
-    user: User,
-    image: File,
-    comunidad: Comunidad
-  ) {
-      const image2: any = await this.http.uploadImage(image);
-      user.imagen = image2!.file.originalname;
-      this.http.createUser(user).then((user) => {
-        this.logueado = true;
-        this.usuarioLogueado = user || {};
-      });
-      this.users = await this.http.getAllUsers();
-      this.ref?.close();
-      this.http
-        .createVecino({ userid: this.usuarioLogueado.id, vivienda:  comunidad.direccion});
+  async insertarUser(user: User, image: File, comunidad: Comunidad) {
+    const image2: any = await this.http.uploadImage(image);
+    user.imagen = image2!.file.originalname;
+    this.http.createUser(user).then((user) => {
+      this.logueado = true;
+      this.usuarioLogueado = user || {};
+    });
+    this.users = await this.http.getAllUsers();
+    this.ref?.close();
+    this.http.createVecino({
+      userid: this.usuarioLogueado.id,
+      vivienda: comunidad.direccion,
+    });
   }
 
   mensaje(header: string, text: string = '', severity: string = 'info') {

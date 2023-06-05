@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { VecinosService } from '../../vecinos.service';
 
 @Component({
@@ -6,11 +6,13 @@ import { VecinosService } from '../../vecinos.service';
   templateUrl: './vecinos.component.html',
   styleUrls: ['./vecinos.component.css']
 })
-export class VecinosComponent {
-  public vecinos;
+export class VecinosComponent implements OnInit {
+  public vecinos: { nombre: any; telefono: any; imagen: any; }[] = [];
 
-  constructor(private service: VecinosService) {
-    this.vecinos = service.getVecinos();
+  constructor(private service: VecinosService) {}
+
+  async ngOnInit() {
+    this.vecinos = await this.service.getVecinos();
   }
 
 }
