@@ -1,35 +1,37 @@
 h2 {
-    text-align: center;
+  text-align: center;
 }
 
 .card {
-    width: 50%;
-}
-
-.container {
-    display: flex;
-    flex-direction: row;
+  width: 100%;
 }
 
 .ingEGas {
-    min-width: 47%;
-    min-height: 80%;
+  display: flex;
+  flex-direction: row;
+  min-width: 100%;
+}
+
+.ingEGas * {
+  width: 47%;
+  margin: 3%;
+  margin-bottom: 0;
 }
 
 .cuentsYsaldo {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .cuentsYsaldo > * {
-    margin: 10px;
+  margin: 10px;
 }
 
 .saldo {
-    display: flex;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
 }

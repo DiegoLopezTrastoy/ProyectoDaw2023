@@ -1,17 +1,31 @@
 <div>
   <div class="cuentsYsaldo">
     <h2>Cuentas:</h2>
+    <p-button styleClass="p-button-success">Insertar ingreso</p-button>
+    <p-button styleClass="p-button-danger">Insertar gasto</p-button>
     <p-panel class="saldo" header="Saldo actual"> {{ saldo }}€ </p-panel>
   </div>
   <div class="container">
     <div class="card">
-      <p-chart type="line" [data]="data" [options]="options"></p-chart>
+      <p-chart height="25vh" type="line" [data]="data" [options]="options"></p-chart>
     </div>
     <div class="ingEGas">
       <p-carousel
+        [value]="messages1"
+        [numVisible]="2"
+        [numScroll]="1"
+        [circular]="true"
+        [orientation]="'vertical'"
+      >
+        <ng-template let-product pTemplate="item">
+          <p-messages [(value)]="messages1" [closable]="false"></p-messages>
+        </ng-template>
+      </p-carousel>
+
+      <p-carousel
         class="carousel"
         [value]="messages1"
-        [numVisible]="3"
+        [numVisible]="2"
         [numScroll]="1"
         [circular]="true"
         [orientation]="'vertical'"

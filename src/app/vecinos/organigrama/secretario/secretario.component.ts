@@ -10,6 +10,6 @@ export class SecretarioComponent {
   public secretario: any;
 
   constructor(private service: VecinosService) {
-    this.secretario = service.getSecretario();
+    // this.secretario = service.getSecretario();
   }
 }

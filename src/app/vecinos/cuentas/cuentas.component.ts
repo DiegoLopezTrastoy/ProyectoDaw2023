@@ -6,30 +6,24 @@ import { VecinosService } from '../vecinos.service';
   templateUrl: './cuentas.component.html',
   styleUrls: ['./cuentas.component.css'],
 })
-export class CuentasComponent {
+export class CuentasComponent implements OnInit {
   public data: any;
   public options: any;
-  public gastosEIngresos: any[];
-  public ing: number[];
-  public gas: number[];
-  public saldo: number;
-  public messages1: any[];
+  public ing: number[] = [];
+  public gas: number[] = [];
+  public saldo: number = 0;
+  public messages1: any[] = [];
 
   constructor(private service: VecinosService) {
-    this.gastosEIngresos = service.getGastosEIngresos();
-    this.saldo = service.getSaldoActual();
+  }
+  ngOnInit(): void {
+    this.saldo = this.service.getSaldoActual();
     this.messages1 = [];
     let inggas: any[] = [];
-    this.gastosEIngresos.forEach((element) => {
-      this.messages1.push({
-        severity: element.precio >= 0 ? 'success' : 'error',
-        summary: element.precio + '€',
-        detail: element.nombre,
-      });
-    });
+    
 
-    this.ing = service.getIngresosMensuales();
-    this.gas = service.getGastosMensuales();
+    this.ing = this.service.getIngresosMensuales();
+    this.gas = this.service.getGastosMensuales();
 
     const documentStyle = getComputedStyle(document.documentElement);
     const textColor = documentStyle.getPropertyValue('--text-color');
