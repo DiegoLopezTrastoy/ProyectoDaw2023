@@ -12,3 +12,7 @@
 .array > * {
     margin: 30px;
 }
+
+.card {
+  width: 10%;
+}

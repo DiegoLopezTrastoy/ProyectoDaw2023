@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { VecinosService } from '../vecinos.service';
 import { env } from 'src/env';
+import { Message } from 'primeng/api';
 
 @Component({
   selector: 'app-avisos',
@@ -13,6 +14,7 @@ export class AvisosComponent implements OnInit {
   public visible: boolean = false;
   public urlBackendImage: string = `${env.BASE_URL}/image/`;
   public textArea: string = '';
+  private imagen: any;
 
   constructor(private servicio: VecinosService) {}
   
@@ -20,11 +22,17 @@ export class AvisosComponent implements OnInit {
     this.avisos = await this.servicio.getAvisos();
   }
 
-  anadir() {
+  async anadir() {
     this.visible = false;
-    const aviso = {imagen: 'assets/no_image.jpg', descripcion: this.textArea};
-    this.avisos.push(aviso);
-    this.servicio.addAviso(aviso);
+    this.textArea = (document.querySelector('#input') as HTMLTextAreaElement).value;
+    const imageName = this.imagen.name ? this.imagen.name : 'no_image.jpg';
+    const aviso = { imagen: imageName, texto: this.textArea};
+    this.servicio.addAviso(aviso, this.imagen, this.imagen.name ? true: false);
+    this.avisos = await this.servicio.getAvisos();
+  }
+
+  onFileUpload(event: any) {
+    this.imagen = event.files[0];
   }
 
   cancel() {

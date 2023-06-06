@@ -1,7 +1,7 @@
 export interface Gasto {
     id?: string;
     descripcion?: string;
-    cantidad?: string;
+    cantidad?: number;
     fecha?: string;
   }
   

@@ -10,22 +10,32 @@
       <div class="form">
         <div>
           <p-fileUpload
-            mode="basic"
             chooseLabel="Seleccione una imagen"
-            name="demo[]"
+            [customUpload]="true"
+            (uploadHandler)="onFileUpload($event)"
+            [auto]="true"
             [url]="urlBackendImage"
             accept="image/*"
-            [maxFileSize]="1000000"
           ></p-fileUpload>
         </div>
 
         <div class="input">
           <label for="input">Descripción:</label>
-          <textarea id="input" rows="5" cols="60" pInputTextarea [value]="textArea"></textarea>
+          <textarea
+            id="input"
+            rows="5"
+            cols="60"
+            pInputTextarea
+            [value]="textArea"
+          ></textarea>
         </div>
         <div>
-          <p-button styleClass="p-button-success" (onClick)="anadir()">Añadir</p-button>
-          <p-button styleClass="p-button-danger" (onClick)="cancel()">Cancelar</p-button>
+          <p-button styleClass="p-button-success" (onClick)="anadir()"
+            >Añadir</p-button
+          >
+          <p-button styleClass="p-button-danger" (onClick)="cancel()"
+            >Cancelar</p-button
+          >
         </div>
       </div>
     </p-dialog>
@@ -33,7 +43,14 @@
   <div class="mensajes">
     <p-messages severity="info" [closable]="false" *ngFor="let aviso of avisos">
       <ng-template pTemplate>
-        <p-image [src]="'https://www.dtrastoy.informaticapinguela.net/image/'+aviso.imagen" [preview]="true" width="50"> </p-image>
+        <p-image
+          [src]="
+            'https://www.dtrastoy.informaticapinguela.net/image/' + aviso.imagen
+          "
+          [preview]="true"
+          width="50"
+        >
+        </p-image>
         <div class="ml-2 text-center">{{ aviso.texto }}</div>
       </ng-template>
     </p-messages>

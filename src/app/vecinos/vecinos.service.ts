@@ -25,21 +25,21 @@ export class VecinosService {
     public dialogService: DialogService,
     private messageService: MessageService,
     private http: HttpService
-    ) {}
+  ) {}
 
-      getAllComuniti(): Promise<Comunidad[]> {
-        return this.http.getAllComunities();
-      }
-      
-      getAvisos(): Promise<Aviso[]> {
-        // return this.http.getAvisosByComuniti(this.comunidad);
-        console.log(this.comunidad);
-        
-        return this.http.getAvisosByComuniti(this.comunidad);
+  getAllComuniti(): Promise<Comunidad[]> {
+    return this.http.getAllComunities();
   }
 
-  addAviso(aviso: Aviso) {
-    //Todo insertar aviso en la base de tatos
+  getAvisos(): Promise<Aviso[]> {
+    // return this.http.getAvisosByComuniti(this.comunidad);
+    console.log(this.comunidad);
+
+    return this.http.getAvisosByComuniti(this.comunidad);
+  }
+
+  addAviso(aviso: Aviso, image: File, uploadImage: boolean) {
+    this.http.addAviso(aviso, this.comunidad, image, uploadImage);
   }
 
   getSaldoActual() {
@@ -47,14 +47,14 @@ export class VecinosService {
     return 9325;
   }
 
-  getIngresosMensuales() {
+  getIngresosAnuales() {
     // Todo recuperar obras de la base de datos
-    return [30, 30, 30, 30];
+    return this.http.getIngresosByComuniti(this.comunidad);
   }
 
-  getGastosMensuales() {
+  getGastosAnuales() {
     // Todo recuperar obras de la base de datos
-    return [0, -200, 0, 200];
+    return this.http.getGastosByComuniti(this.comunidad);
   }
 
   getGastosEIngresos() {
@@ -186,10 +186,7 @@ export class VecinosService {
     this.users = await this.http.getAllUsers();
     for (let i = 0; i < this.users.length; i++) {
       if (username && username === this.users[i].nombre) {
-        if (
-          password &&
-          (password === this.users[i].password!)
-        ) {
+        if (password && password === this.users[i].password!) {
           this.usuarioLogueado = this.users[i];
           this.logueado = true;
           this.usuarioLogueado = this.users[i];

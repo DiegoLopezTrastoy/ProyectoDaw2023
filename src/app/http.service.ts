@@ -9,32 +9,46 @@ import { Gasto } from './interfaces/Gasto.interface';
 import { Ingreso } from './interfaces/Ingreso.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HttpService {
 
   async getVecinos(comunidad: Comunidad) {
-    const criteria = { "comunidad": { "id": Number(comunidad.id) } };
-    const vecinos: any[] = (await this.http
-      .post<any[]>(`${env.BASE_URL}/vecino/by-comunidad`, criteria)
-      .toPromise()) || [];
-      let array: { nombre: any; telefono: any; imagen: any; }[] = [];
-    vecinos.forEach((vecino)=> {
+    const criteria = { comunidad: { id: Number(comunidad.id) } };
+    const vecinos: any[] =
+      (await this.http
+        .post<any[]>(`${env.BASE_URL}/vecino/by-comunidad`, criteria)
+        .toPromise()) || [];
+    let array: { nombre: any; telefono: any; imagen: any }[] = [];
+    vecinos.forEach((vecino) => {
       array.push({
         nombre: vecino.user.nombre,
         telefono: vecino.user.num_telefono,
         imagen: vecino.user.imagen,
       });
-    })
+    });
     return array;
   }
 
   async getSecretario(comunidad: Comunidad) {
-    const criteria = {"comunidades": {"id": comunidad.id}}
-    const secretario: any = (await this.http.post<any[]>(`${env.BASE_URL}/secretario/by-comunidad`, criteria).toPromise()||[])[0];
+    const criteria = { comunidades: { id: comunidad.id } };
+    const secretario: any = ((await this.http
+      .post<any[]>(`${env.BASE_URL}/secretario/by-comunidad`, criteria)
+      .toPromise()) || [])[0];
     const date = new Date();
-    const edad = date.getFullYear() - secretario.user.fecha_nacimiento.slice(secretario.user.fecha_nacimiento.lastIndexOf('/')+1);
-    return {imagen: secretario.user.imagen, nombre: secretario.user.nombre, edad , numTelefono: secretario.user.num_telefono, fechaNombramiento: secretario.fechaInicio, fechaFin: secretario.fechaFin}
+    const edad =
+      date.getFullYear() -
+      secretario.user.fecha_nacimiento.slice(
+        secretario.user.fecha_nacimiento.lastIndexOf('/') + 1
+      );
+    return {
+      imagen: secretario.user.imagen,
+      nombre: secretario.user.nombre,
+      edad,
+      numTelefono: secretario.user.num_telefono,
+      fechaNombramiento: secretario.fechaInicio,
+      fechaFin: secretario.fechaFin,
+    };
   }
 
   async getPresidente(comunidad: Comunidad) {
@@ -57,24 +71,24 @@ export class HttpService {
       fechaFin: presidente.fechaFin,
     };
   }
-  
-  constructor(private http: HttpClient) { }
-  
-  async getIngresosByComuniti(comunidad: Comunidad): Promise<Ingreso> {
+
+  constructor(private http: HttpClient) {}
+
+  async getIngresosByComuniti(comunidad: Comunidad): Promise<Ingreso[]> {
     const criteria = { comunidad: { id: comunidad.id } };
     return (
       (await this.http
-        .post<Ingreso>(`${env.BASE_URL}/ingreso/by-comunidad`, criteria)
-        .toPromise()) || {}
+        .post<Ingreso[]>(`${env.BASE_URL}/ingreso/by-comunidad`, criteria)
+        .toPromise()) || []
     );
   }
 
-  async getGastosByComuniti(comunidad: Comunidad): Promise<Gasto> {
+  async getGastosByComuniti(comunidad: Comunidad): Promise<Gasto[]> {
     const criteria = { comunidad: { id: comunidad.id } };
     return (
       (await this.http
-        .post<Gasto>(`${env.BASE_URL}/gasto/by-comunidad`, criteria)
-        .toPromise()) || {}
+        .post<Gasto[]>(`${env.BASE_URL}/gasto/by-comunidad`, criteria)
+        .toPromise()) || []
     );
   }
 
@@ -82,6 +96,15 @@ export class HttpService {
     return (
       (await this.http.get<Aviso[]>(`${env.BASE_URL}/aviso`).toPromise()) || []
     );
+  }
+
+  async addAviso(aviso: Aviso, comunidad: Comunidad, image: File, uploadImage: boolean) {
+    if (uploadImage) {
+      aviso.imagen = (await this.uploadImage(image))?.file.originalname;
+    } 
+    return await this.http
+      .post<User>(`${env.BASE_URL}/aviso`, {...aviso, comunidad: {id: comunidad.id}})
+      .toPromise();
   }
 
   async getAvisosByComuniti(comunidad: Comunidad): Promise<Aviso[]> {
@@ -118,7 +141,7 @@ export class HttpService {
     return await this.http.post<User>(`${env.BASE_URL}/user`, user).toPromise();
   }
 
-  async uploadImage(image: any): Promise<File | undefined> {
+  async uploadImage(image: any): Promise<any | undefined> {
     const formData = new FormData();
     formData.append('file', image);
     return await this.http

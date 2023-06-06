@@ -9,29 +9,29 @@
     <div class="card">
       <p-chart height="25vh" type="line" [data]="data" [options]="options"></p-chart>
     </div>
-    <div class="ingEGas">
+    <div class="ingEGas" *ngIf="visible">
       <p-carousel
-        [value]="messages1"
+        [value]="ingresosStr"
         [numVisible]="2"
         [numScroll]="1"
         [circular]="true"
         [orientation]="'vertical'"
       >
         <ng-template let-product pTemplate="item">
-          <p-messages [(value)]="messages1" [closable]="false"></p-messages>
+          <p-messages [(value)]="ingresosStr" [closable]="false"></p-messages>
         </ng-template>
       </p-carousel>
 
       <p-carousel
         class="carousel"
-        [value]="messages1"
+        [value]="gastosStr"
         [numVisible]="2"
         [numScroll]="1"
         [circular]="true"
         [orientation]="'vertical'"
       >
         <ng-template let-product pTemplate="item">
-          <p-messages [(value)]="messages1" [closable]="false"></p-messages>
+          <p-messages [(value)]="gastosStr" [closable]="false"></p-messages>
         </ng-template>
       </p-carousel>
     </div>

@@ -13,12 +13,13 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   ) {}
 
   validar () {
-    if (!this.service.logueado) {
-      this.service.mensaje('Permiso denegado', 'No tiene permiso para acceder a la ruta, inicie sesion para obtener el permiso.', 'error');
-    } else {
-      this.service.sidebarVisible = false;
-    }
-    return this.service.logueado;
+    // if (!this.service.logueado) {
+    //   this.service.mensaje('Permiso denegado', 'No tiene permiso para acceder a la ruta, inicie sesion para obtener el permiso.', 'error');
+    // } else {
+    //   this.service.sidebarVisible = false;
+    // }
+    // return this.service.logueado;
+    return true;
   }
   canActivate(
     route: ActivatedRouteSnapshot,

@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { VecinosService } from '../vecinos.service';
+import { Ingreso } from 'src/app/interfaces/Ingreso.interface';
+import { Gasto } from 'src/app/interfaces/Gasto.interface';
+import { Message, PrimeIcons } from 'primeng/api';
 
 @Component({
   selector: 'app-cuentas',
@@ -9,21 +12,19 @@ import { VecinosService } from '../vecinos.service';
 export class CuentasComponent implements OnInit {
   public data: any;
   public options: any;
-  public ing: number[] = [];
-  public gas: number[] = [];
+  public ingresos: Ingreso[] = [];
+  public ingresosNum: Number[] = [];
+  public ingresosStr: Message[] = [];
+  public gastos: Gasto[] = [];
+  public gastosNum: Number[] = [];
+  public gastosStr: Message[] = [];
   public saldo: number = 0;
-  public messages1: any[] = [];
+  public visible: boolean = false;
 
-  constructor(private service: VecinosService) {
-  }
-  ngOnInit(): void {
-    this.saldo = this.service.getSaldoActual();
-    this.messages1 = [];
-    let inggas: any[] = [];
-    
-
-    this.ing = this.service.getIngresosMensuales();
-    this.gas = this.service.getGastosMensuales();
+  constructor(private service: VecinosService) {}
+  
+  async ngOnInit() {
+    await this.init();
 
     const documentStyle = getComputedStyle(document.documentElement);
     const textColor = documentStyle.getPropertyValue('--text-color');
@@ -50,14 +51,14 @@ export class CuentasComponent implements OnInit {
       datasets: [
         {
           label: 'Ingresos',
-          data: this.ing,
+          data: this.ingresosNum,
           fill: false,
           borderColor: documentStyle.getPropertyValue('--green-500'),
           tension: 0.4,
         },
         {
           label: 'Gastos',
-          data: this.gas,
+          data: this.gastosNum,
           fill: false,
           borderColor: documentStyle.getPropertyValue('--red-500'),
           tension: 0.4,
@@ -97,4 +98,21 @@ export class CuentasComponent implements OnInit {
       },
     };
   }
+
+  private init = async () => {
+    this.saldo = this.service.getSaldoActual();
+    this.ingresos = await this.service.getIngresosAnuales();
+    this.gastos = await this.service.getGastosAnuales();
+    this.ingresosNum = [];
+    this.ingresos.forEach((val) => {
+      this.ingresosNum.push(val.cantidad!);
+      this.ingresosStr.push({closable: false, severity: 'success', summary: `${val.cantidad} ${val.descripcion}`, icon: PrimeIcons.PLUS})
+    });
+    this.gastosNum = [];
+    this.gastos.forEach((val) => {
+      this.gastosNum.push(val.cantidad!);
+      this.gastosStr.push({closable: false, severity: 'error', summary: `${val.cantidad} ${val.descripcion}`, icon: PrimeIcons.MINUS})
+    });
+    this.visible = true;
+  };
 }

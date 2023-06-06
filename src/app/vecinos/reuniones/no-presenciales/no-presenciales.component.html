@@ -1,1 +1,19 @@
-<p>no-presenciales works!</p>
+<div>
+  <h3 class="center">Reuniones no presenciales:</h3>
+  <div>
+    <p-accordion>
+      <div class="acordeon">
+        <p-accordionTab [header]="item.fecha" *ngFor="let item of reuniones">
+          <ul>
+            <li *ngFor="let item2 of item.temas">
+              {{ item2 }}
+            </li>
+            <li>
+              <a href="">Enlace reunión online</a>
+            </li>
+          </ul>
+        </p-accordionTab>
+      </div>
+    </p-accordion>
+  </div>
+</div>
